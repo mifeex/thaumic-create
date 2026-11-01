@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "thaumic_reborn:thaumium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "thaumic_create:plate_thaumium",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "thaumic_reborn:void_metal_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "thaumic_create:plate_void",
+      "count": 1
+    }
+  ]
+}

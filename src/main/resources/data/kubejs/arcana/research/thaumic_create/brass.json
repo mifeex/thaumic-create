@@ -1,0 +1,51 @@
+{
+  "id": "create_brass_transmutation",
+  "category": "create",
+  "icon": "create:brass_ingot",
+  "title": "research.kubejs.thaumic_create.brass.title",
+  "subtitle": "research.kubejs.thaumic_create.brass.subtitle",
+  "parents": [
+    "create_integration"
+  ],
+  "hidden_parents": [
+    "crucible"
+  ],
+  "reveal_when": {
+    "type": "scan",
+    "id": "item:create:brass_ingot"
+  },
+  "unlock_when": {
+    "type": "scan",
+    "id": "item:create:brass_ingot"
+  },
+  "auto_unlock": false,
+  "research_cost": [
+    {
+      "id": "metallum",
+      "amount": 1
+    },
+    {
+      "id": "permutatio",
+      "amount": 1
+    },
+    {
+      "id": "praecantatio",
+      "amount": 1
+    }
+  ],
+  "details": {
+    "complexity": 1
+  },
+  "x": 0,
+  "y": 40,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.kubejs.thaumic_create.brass.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "kubejs:thaumic_create/brass"
+    }
+  ]
+}

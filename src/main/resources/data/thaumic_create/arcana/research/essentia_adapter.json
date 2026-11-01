@@ -1,0 +1,39 @@
+{
+  "id": "create_essentia_adapter",
+  "category": "create",
+  "icon": "thaumic_create:essentia_adapter",
+  "title": "research.thaumic_create.essentia_adapter.title",
+  "parents": [
+    "create_plate_thaumium"
+  ],
+  "reveal_when": {
+    "type": "research_completed",
+    "id": "create_plate_thaumium"
+  },
+  "auto_unlock": false,
+  "research_cost": [
+    {
+      "id": "metallum",
+      "amount": 1
+    },
+    {
+      "id": "praecantatio",
+      "amount": 1
+    }
+  ],
+  "details": {
+    "complexity": 1
+  },
+  "x": -56,
+  "y": 168,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.essentia_adapter.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "thaumic_create:essentia_adapter"
+    }
+  ]
+}

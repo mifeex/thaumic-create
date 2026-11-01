@@ -1,0 +1,19 @@
+{
+  "id": "create_integration",
+  "category": "create",
+  "icon": "create:cogwheel",
+  "title": "research.kubejs.thaumic_create.root.title",
+  "subtitle": "research.kubejs.thaumic_create.root.subtitle",
+  "parents": [
+    "first_steps"
+  ],
+  "auto_unlock": true,
+  "x": 0,
+  "y": -80,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.kubejs.thaumic_create.root.body"
+    }
+  ]
+}

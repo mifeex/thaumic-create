@@ -1,0 +1,14 @@
+{
+  "research": "create_granite",
+  "catalyst": {
+    "item": "minecraft:stone"
+  },
+  "output": {
+    "item": "minecraft:granite",
+    "count": 1
+  },
+  "aspects": {
+    "praecantatio": 1,
+    "ignis": 1
+  }
+}

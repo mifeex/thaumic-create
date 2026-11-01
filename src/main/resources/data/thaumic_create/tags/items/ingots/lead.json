@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#forge:ingots/lead",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/lead",
+      "required": false
+    }
+  ]
+}

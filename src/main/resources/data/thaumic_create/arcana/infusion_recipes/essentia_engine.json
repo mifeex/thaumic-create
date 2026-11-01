@@ -1,0 +1,47 @@
+{
+  "research": "create_essentia_engine",
+  "instability": 6,
+  "central": {
+    "item": "create:brass_casing"
+  },
+  "components": [
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "create:brass_sheet"
+    },
+    {
+      "item": "create:brass_sheet"
+    },
+    {
+      "item": "create:brass_sheet"
+    },
+    {
+      "item": "create:brass_sheet"
+    },
+    {
+      "item": "thaumic_reborn:greatwood_log"
+    },
+    {
+      "item": "thaumic_reborn:greatwood_log"
+    },
+    {
+      "item": "create:large_cogwheel"
+    }
+  ],
+  "result": {
+    "item": "thaumic_create:essentia_engine",
+    "count": 1
+  },
+  "essentia": {
+    "potentia": 32,
+    "machina": 16,
+    "motus": 16,
+    "permutatio": 8,
+    "ordo": 8
+  }
+}

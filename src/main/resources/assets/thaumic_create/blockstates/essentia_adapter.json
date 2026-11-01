@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thaumic_create:block/essentia_adapter",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "thaumic_create:block/essentia_adapter",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thaumic_create:block/essentia_adapter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thaumic_create:block/essentia_adapter",
+      "y": 270
+    }
+  }
+}

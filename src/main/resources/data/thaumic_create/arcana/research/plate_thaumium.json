@@ -1,0 +1,37 @@
+{
+  "id": "create_plate_thaumium",
+  "category": "create",
+  "icon": "thaumic_create:plate_thaumium",
+  "title": "research.thaumic_create.plate_thaumium.title",
+  "parents": [
+    "create_integration",
+    "thaumium"
+  ],
+  "auto_unlock": false,
+  "reveal_when": {
+    "type": "research_completed",
+    "id": "thaumium"
+  },
+  "purchase_cost": [
+    {
+      "id": "metallum",
+      "amount": 4
+    },
+    {
+      "id": "praecantatio",
+      "amount": 2
+    }
+  ],
+  "x": -56,
+  "y": 104,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.plate_thaumium.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "thaumic_create:pressing/plate_thaumium"
+    }
+  ]
+}

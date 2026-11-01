@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="thaumic_create"
+version="0.4.0"
+displayName="Thaumic Create"
+description="Create integration for Thaumic Reborn"
+
+[[dependencies.thaumic_create]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.10,48)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.thaumic_create]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.thaumic_create]]
+modId="thaumic_reborn"
+mandatory=true
+versionRange="[0,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.thaumic_create]]
+modId="create"
+mandatory=true
+versionRange="[6.0.8,7)"
+ordering="AFTER"
+side="BOTH"

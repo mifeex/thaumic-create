@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=north,upper=false": {
+      "model": "thaumic_create:block/essentia_engine",
+      "y": 0
+    },
+    "facing=north,upper=true": {
+      "model": "thaumic_create:block/essentia_engine_upper",
+      "y": 0
+    },
+    "facing=east,upper=false": {
+      "model": "thaumic_create:block/essentia_engine",
+      "y": 90
+    },
+    "facing=east,upper=true": {
+      "model": "thaumic_create:block/essentia_engine_upper",
+      "y": 90
+    },
+    "facing=south,upper=false": {
+      "model": "thaumic_create:block/essentia_engine",
+      "y": 180
+    },
+    "facing=south,upper=true": {
+      "model": "thaumic_create:block/essentia_engine_upper",
+      "y": 180
+    },
+    "facing=west,upper=false": {
+      "model": "thaumic_create:block/essentia_engine",
+      "y": 270
+    },
+    "facing=west,upper=true": {
+      "model": "thaumic_create:block/essentia_engine_upper",
+      "y": 270
+    }
+  }
+}

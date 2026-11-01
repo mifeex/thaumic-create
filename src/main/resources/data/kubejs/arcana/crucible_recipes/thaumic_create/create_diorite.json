@@ -1,0 +1,14 @@
+{
+  "research": "create_diorite",
+  "catalyst": {
+    "item": "minecraft:stone"
+  },
+  "output": {
+    "item": "minecraft:diorite",
+    "count": 1
+  },
+  "aspects": {
+    "praecantatio": 1,
+    "ordo": 1
+  }
+}

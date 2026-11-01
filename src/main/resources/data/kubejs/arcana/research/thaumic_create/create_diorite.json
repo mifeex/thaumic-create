@@ -1,0 +1,35 @@
+{
+  "id": "create_diorite",
+  "category": "create",
+  "icon": "minecraft:diorite",
+  "title": "research.kubejs.thaumic_create.create_diorite.title",
+  "parents": [
+    "create_integration"
+  ],
+  "hidden_parents": [
+    "crucible"
+  ],
+  "auto_unlock": false,
+  "purchase_cost": [
+    {
+      "id": "praecantatio",
+      "amount": 5
+    },
+    {
+      "id": "ordo",
+      "amount": 5
+    }
+  ],
+  "x": -56,
+  "y": -24,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.kubejs.thaumic_create.create_diorite.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "kubejs:thaumic_create/create_diorite"
+    }
+  ]
+}

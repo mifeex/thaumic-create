@@ -1,0 +1,7 @@
+[01нояб.2026 15:47:20.237] [Server thread/INFO] [com.thaumicreborn.ThaumicReborn/]: [TCM-RESEARCH #1][SERVER_RESEARCH_PURCHASE_REJECTED] player=PressOwner result=UNAVAILABLE
+[01нояб.2026 15:47:20.239] [Server thread/INFO] [com.thaumicreborn.ThaumicReborn/]: [TCM-RESEARCH #2][SERVER_RESEARCH_PURCHASED] player=PressOwner research=create_plate_thaumium cost=[ComponentCost[aspectId=metallum, amount=4], ComponentCost[aspectId=praecantatio, amount=2]]
+[01нояб.2026 15:47:20.249] [Server thread/INFO] [com.thaumicreborn.ThaumicReborn/]: [TCM-RESEARCH #3][SERVER_RESEARCH_PURCHASE_REJECTED] player=PressOwner result=UNAVAILABLE
+[01нояб.2026 15:47:20.250] [Server thread/INFO] [com.thaumicreborn.ThaumicReborn/]: [TCM-RESEARCH #4][SERVER_RESEARCH_PURCHASED] player=PressOwner research=create_plate_void cost=[ComponentCost[aspectId=metallum, amount=4], ComponentCost[aspectId=praecantatio, amount=2], ComponentCost[aspectId=vacuos, amount=2]]
+[01нояб.2026 15:47:20.256] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: [++]
+[01нояб.2026 15:47:20.257] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: ========= 2 GAME TESTS COMPLETE IN 640.9 ms ======================
+[01нояб.2026 15:47:20.257] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: All 2 required tests passed :)

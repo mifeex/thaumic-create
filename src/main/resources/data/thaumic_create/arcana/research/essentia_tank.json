@@ -1,0 +1,39 @@
+{
+  "id": "create_essentia_tank",
+  "category": "create",
+  "icon": "thaumic_create:essentia_tank",
+  "title": "research.thaumic_create.essentia_tank.title",
+  "parents": [
+    "create_essentia_adapter"
+  ],
+  "reveal_when": {
+    "type": "research_completed",
+    "id": "create_essentia_adapter"
+  },
+  "auto_unlock": false,
+  "research_cost": [
+    {
+      "id": "metallum",
+      "amount": 1
+    },
+    {
+      "id": "praecantatio",
+      "amount": 1
+    }
+  ],
+  "details": {
+    "complexity": 1
+  },
+  "x": -56,
+  "y": 232,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.essentia_tank.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "thaumic_create:essentia_tank"
+    }
+  ]
+}

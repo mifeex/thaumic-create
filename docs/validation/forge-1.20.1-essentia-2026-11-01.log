@@ -1,0 +1,6 @@
+[01нояб.2026 16:09:35.319] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.8 initializing! Commit hash: 1a1a9a2819b4f89f78caec41b55ed8cb222fa24b
+[01нояб.2026 16:09:41.633] [main/INFO] [com.thaumicreborn.ThaumicReborn/]: Loaded 59 active Crucible recipes
+[01нояб.2026 16:09:41.673] [main/INFO] [com.thaumicreborn.ThaumicReborn/]: Loaded 214 research definitions; 0 have inactive gameplay content
+[01нояб.2026 16:09:50.803] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: 6 tests are now running!
+[01нояб.2026 16:09:54.568] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: ========= 6 GAME TESTS COMPLETE ======================
+[01нояб.2026 16:09:54.569] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: All 6 required tests passed :)

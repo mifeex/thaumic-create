@@ -1,0 +1,25 @@
+{
+  "type": "thaumic_reborn:arcane_shaped",
+  "research": "create_essentia_tank",
+  "vis": {},
+  "pattern": [
+    "PGP",
+    "GCG",
+    "PGP"
+  ],
+  "key": {
+    "P": {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "create:fluid_tank"
+    }
+  },
+  "result": {
+    "item": "thaumic_create:essentia_tank",
+    "count": 1
+  }
+}

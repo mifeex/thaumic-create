@@ -1,0 +1,6 @@
+[01нояб.2026 16:05:12.053] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
+[01нояб.2026 16:05:28.491] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 3241 recipes
+[01нояб.2026 16:05:29.396] [main/INFO] [com.thaumicreborn.ThaumicReborn/]: Loaded 214 research definitions; 0 have inactive gameplay content
+[01нояб.2026 16:05:37.960] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: 8 tests are now running at position -11207389, -59, 5169856!
+[01нояб.2026 16:05:40.701] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: ========= 8 GAME TESTS COMPLETE IN 2.739 s ======================
+[01нояб.2026 16:05:40.701] [Server thread/INFO] [net.minecraft.gametest.framework.GameTestServer/]: All 8 required tests passed :)

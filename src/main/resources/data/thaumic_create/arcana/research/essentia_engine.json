@@ -1,0 +1,106 @@
+{
+  "id": "create_essentia_engine",
+  "category": "create",
+  "icon": "thaumic_create:essentia_engine",
+  "title": "research.thaumic_create.engine.title",
+  "parents": [
+    "create_brass_transmutation",
+    "create_plate_thaumium"
+  ],
+  "hidden_parents": [
+    "infusion"
+  ],
+  "auto_unlock": false,
+  "research_cost": [
+    {
+      "id": "metallum",
+      "amount": 1
+    },
+    {
+      "id": "praecantatio",
+      "amount": 1
+    }
+  ],
+  "details": {
+    "complexity": 1
+  },
+  "x": 112,
+  "y": 168,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.engine.body"
+    },
+    {
+      "type": "infusion",
+      "recipe": "thaumic_create:essentia_engine",
+      "output": "thaumic_create:essentia_engine",
+      "central": "create:brass_casing",
+      "components": [
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "create:brass_sheet"
+        },
+        {
+          "item": "create:brass_sheet"
+        },
+        {
+          "item": "create:brass_sheet"
+        },
+        {
+          "item": "create:brass_sheet"
+        },
+        {
+          "item": "thaumic_reborn:greatwood_log"
+        },
+        {
+          "item": "thaumic_reborn:greatwood_log"
+        },
+        {
+          "item": "create:large_cogwheel"
+        }
+      ],
+      "instability": "HIGH",
+      "aspect_costs": [
+        {
+          "id": "potentia",
+          "amount": 32
+        },
+        {
+          "id": "machina",
+          "amount": 16
+        },
+        {
+          "id": "motus",
+          "amount": 16
+        },
+        {
+          "id": "permutatio",
+          "amount": 8
+        },
+        {
+          "id": "ordo",
+          "amount": 8
+        }
+      ]
+    }
+  ],
+  "reveal_when": {
+    "type": "all_of",
+    "conditions": [
+      {
+        "type": "research_completed",
+        "id": "create_brass_transmutation"
+      },
+      {
+        "type": "research_completed",
+        "id": "create_plate_thaumium"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "item",
+  "target": "create:brass_ingot",
+  "aspects": [
+    {
+      "id": "metallum",
+      "amount": 2
+    },
+    {
+      "id": "permutatio",
+      "amount": 1
+    }
+  ]
+}

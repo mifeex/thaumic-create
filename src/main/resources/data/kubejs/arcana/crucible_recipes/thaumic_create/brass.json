@@ -1,0 +1,15 @@
+{
+  "research": "create_brass_transmutation",
+  "catalyst": {
+    "tag": "thaumic_create:ingots/lead"
+  },
+  "output": {
+    "item": "create:brass_ingot",
+    "count": 1
+  },
+  "aspects": {
+    "permutatio": 1,
+    "praecantatio": 1,
+    "metallum": 1
+  }
+}

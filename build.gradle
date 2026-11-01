@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+}
+version = '0.4.0'
+group = 'com.thaumiccreate'
+base { archivesName = 'thaumic-create-forge-1.20.1' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
+minecraft { mappings channel: 'official', version: '1.20.1' }
+repositories { mavenCentral() }
+dependencies { minecraft 'net.minecraftforge:forge:1.20.1-47.4.10' }
+jar.finalizedBy('reobfJar')
+
+jar { manifest { attributes('MixinConfigs': 'thaumic_create.mixins.json') } }
+
+
+
+dependencies { compileOnly fileTree(dir: 'libs', include: '*.jar') }
+
+if (providers.gradleProperty('verifyDevices').isPresent()) {
+    sourceSets.main.java.srcDir 'src/validation/java'
+    sourceSets.main.resources.srcDir 'src/validation/resources'
+    dependencies {
+        implementation fileTree(dir:'build/validation-mods', include:'*.jar')
+        runtimeOnly fileTree(dir:'libs', include:'*.jar')
+    }
+    minecraft.runs {
+        gameTestServer {
+            workingDirectory file('build/validation-run')
+            property 'forge.enabledGameTestNamespaces', 'thaumic_create_tests'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', file('build/createSrgToMcp/output.srg').absolutePath
+            args '-mixin.config=thaumic_create.mixins.json'
+            mods { thaumic_create { source sourceSets.main } }
+        }
+    }
+}
+jar { exclude 'com/thaumiccreate/validation/**', 'data/thaumic_create_tests/**' }

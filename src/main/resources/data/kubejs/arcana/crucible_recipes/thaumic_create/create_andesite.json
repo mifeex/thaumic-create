@@ -1,0 +1,14 @@
+{
+  "research": "create_andesite",
+  "catalyst": {
+    "item": "minecraft:stone"
+  },
+  "output": {
+    "item": "minecraft:andesite",
+    "count": 1
+  },
+  "aspects": {
+    "praecantatio": 1,
+    "aer": 1
+  }
+}

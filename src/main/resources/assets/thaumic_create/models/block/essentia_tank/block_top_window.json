@@ -1,0 +1,11 @@
+{
+  "parent": "create:block/fluid_tank/block_top_window",
+  "textures": {
+    "0": "thaumic_create:block/essentia_tank_top",
+    "1": "thaumic_create:block/essentia_tank",
+    "3": "thaumic_create:block/essentia_window",
+    "4": "thaumic_create:block/essentia_tank_top",
+    "5": "thaumic_create:block/essentia_window_single",
+    "particle": "thaumic_create:block/essentia_tank"
+  }
+}
