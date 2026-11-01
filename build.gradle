@@ -31,3 +31,16 @@ if (providers.gradleProperty('verifyPress').isPresent()) {
 jar { exclude 'com/thaumiccreate/validation/**', 'data/thaumic_create_tests/**' }
 
 dependencies { compileOnly fileTree(dir: localAddonDependencies, include: '*.jar') }
+
+// Include the actual mods when launching a development client.
+def localAddonRuntime = file('.gradle/local-runtime/neoforge-1.21.1').exists() ? '.gradle/local-runtime/neoforge-1.21.1' : 'runtime-mods'
+dependencies {
+    runtimeOnly fileTree(dir: localAddonDependencies, include: '*.jar')
+    runtimeOnly fileTree(dir: localAddonRuntime, include: '*.jar')
+}
+neoForge.runs {
+    client {
+        client()
+        gameDirectory = file('run-neoforge')
+    }
+}
