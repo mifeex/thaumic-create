@@ -31,4 +31,17 @@ public final class DeviceClient {
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ADAPTER.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
         });
     }
+    @net.neoforged.bus.api.SubscribeEvent
+    public static void registerEngineHud(net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent event) {
+        event.enqueueWork(() -> {
+            var hud = com.thaumicreborn.api.client.ThaumicRebornClientApi.hud();
+            hud.registerAspectContainer(EssentiaEngineBlockEntity.class, (engine, hit) -> {
+                int amount = (int)Math.ceil(engine.storedEssentia());
+                if (amount <= 0) return java.util.Optional.empty();
+                return java.util.Optional.of(new com.thaumicreborn.api.client.HudReadout(
+                        java.util.List.of(new com.thaumicreborn.api.client.HudAspect("potentia", amount)),
+                        hud.onHitFace(hit)));
+            });
+        });
+    }
 }
