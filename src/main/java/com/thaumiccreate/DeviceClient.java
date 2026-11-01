@@ -22,6 +22,7 @@ public final class DeviceClient {
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void setup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
+        TankConnectedTextures.register();
         event.enqueueWork(() -> {
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ENGINE.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.TANK.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
