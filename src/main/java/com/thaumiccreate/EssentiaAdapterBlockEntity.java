@@ -8,9 +8,9 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 public final class EssentiaAdapterBlockEntity extends BlockEntity implements EssentiaTransport {
     public final FluidTank buffer = new FluidTank(EssentiaFluid.BLOCK_CAPACITY, EssentiaFluid::valid) {
@@ -25,12 +25,6 @@ public final class EssentiaAdapterBlockEntity extends BlockEntity implements Ess
         public FluidStack drain(int amount, FluidAction action) { return importing() ? FluidStack.EMPTY : buffer.drain(amount, action); }
         public FluidStack drain(FluidStack stack, FluidAction action) { return importing() ? FluidStack.EMPTY : buffer.drain(stack, action); }
     };
-    private final net.minecraftforge.common.util.LazyOptional<IFluidHandler> capability = net.minecraftforge.common.util.LazyOptional.of(() -> pipe);
-    @Override public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> cap, Direction side) {
-        if (cap == net.minecraftforge.common.capabilities.ForgeCapabilities.FLUID_HANDLER && side == front()) return capability.cast();
-        return super.getCapability(cap, side);
-    }
-    @Override public void invalidateCaps() { super.invalidateCaps(); capability.invalidate(); }
     public EssentiaAdapterBlockEntity(BlockPos pos, BlockState state) { super(DeviceRegistry.ADAPTER_ENTITY.get(), pos, state); }
     public Direction front() { return getBlockState().getValue(EssentiaAdapterBlock.FACING); }
     public boolean importing() { return getBlockState().getValue(EssentiaAdapterBlock.IMPORTING); }
@@ -72,8 +66,12 @@ public final class EssentiaAdapterBlockEntity extends BlockEntity implements Ess
         if (accepted > 0) buffer.fill(EssentiaFluid.stack(aspect, accepted * EssentiaFluid.UNIT), IFluidHandler.FluidAction.EXECUTE);
         return accepted;
     }
-    @Override protected void saveAdditional(CompoundTag tag) { super.saveAdditional(tag); tag.put("Buffer", buffer.writeToNBT(new CompoundTag())); }
-    @Override public void load(CompoundTag tag) { super.load(tag); buffer.readFromNBT(tag.getCompound("Buffer")); }
-    @Override public CompoundTag getUpdateTag() { return saveWithoutMetadata(); }
+    @Override protected void saveAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider); tag.put("Buffer", buffer.writeToNBT(provider, new CompoundTag()));
+    }
+    @Override protected void loadAdditional(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider); buffer.readFromNBT(provider, tag.getCompound("Buffer"));
+    }
+    @Override public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) { return saveWithoutMetadata(provider); }
     @Override public ClientboundBlockEntityDataPacket getUpdatePacket() { return ClientboundBlockEntityDataPacket.create(this); }
 }

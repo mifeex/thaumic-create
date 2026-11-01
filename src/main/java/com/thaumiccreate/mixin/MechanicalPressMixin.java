@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity", remap = false)
 public abstract class MechanicalPressMixin {
     @Inject(method = "getRecipe", at = @At("RETURN"), cancellable = true, remap = false)
-    private void thaumicCreate$research(ItemStack input, CallbackInfoReturnable<Optional<net.minecraft.world.item.crafting.Recipe<?>>> cir) {
+    private void thaumicCreate$research(ItemStack input, CallbackInfoReturnable<Optional<net.minecraft.world.item.crafting.RecipeHolder<?>>> cir) {
         var found = cir.getReturnValue();
-        if (found.isPresent() && !PressResearch.allowed((BlockEntity) (Object) this, found.get().getId())) {
+        if (found.isPresent() && !PressResearch.allowed((BlockEntity) (Object) this, found.get().id())) {
             cir.setReturnValue(Optional.empty());
         }
     }

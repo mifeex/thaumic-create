@@ -1,11 +1,11 @@
 {
   "type": "thaumic_reborn:arcane_shaped",
-  "research": "create_essentia_tank",
+  "research": "create_essentia_adapter",
   "vis": {},
   "pattern": [
-    "PGP",
-    "GCG",
-    "PGP"
+    " P ",
+    "TGC",
+    " P "
   ],
   "key": {
     "P": {
@@ -14,12 +14,15 @@
     "G": {
       "item": "minecraft:glass"
     },
+    "T": {
+      "item": "thaumic_reborn:essentia_tube"
+    },
     "C": {
-      "item": "create:fluid_tank"
+      "item": "create:fluid_pipe"
     }
   },
   "result": {
-    "item": "thaumic_create:essentia_tank",
-    "count": 1
+    "count": 1,
+    "id": "thaumic_create:essentia_adapter"
   }
 }

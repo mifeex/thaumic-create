@@ -2,7 +2,7 @@ package com.thaumiccreate;
 
 import com.thaumicreborn.api.ThaumicRebornApi;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 /** 125 mB is one indivisible Thaumic Reborn essentia unit. */
 public final class EssentiaFluid {
@@ -11,7 +11,8 @@ public final class EssentiaFluid {
     private EssentiaFluid() {}
     public static String aspect(FluidStack stack) {
         if (stack.isEmpty() || stack.getFluid() != DeviceRegistry.ESSENTIA.get()) return null;
-        String value = stack.hasTag() ? stack.getTag().getString("Aspect") : "";
+        var data = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        String value = data == null ? "" : data.copyTag().getString("Aspect");
         return value.isBlank() ? null : value;
     }
     public static boolean valid(FluidStack stack) {
@@ -22,7 +23,7 @@ public final class EssentiaFluid {
         if (aspect == null || aspect.isBlank() || millibuckets <= 0) return FluidStack.EMPTY;
         FluidStack stack = new FluidStack(DeviceRegistry.ESSENTIA.get(), millibuckets);
         CompoundTag tag = new CompoundTag(); tag.putString("Aspect", aspect);
-        stack.setTag(tag);
+        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(tag));
         return stack;
     }
     public static int color(FluidStack stack) {

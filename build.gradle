@@ -1,38 +1,33 @@
 plugins {
-    id 'java'
-    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
+def localAddonDependencies = file('.gradle/local-libs/neoforge-1.21.1').exists() ? '.gradle/local-libs/neoforge-1.21.1' : 'libs'
+
 version = '0.4.0'
 group = 'com.thaumiccreate'
-base { archivesName = 'thaumic-create-forge-1.20.1' }
-java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
-minecraft { mappings channel: 'official', version: '1.20.1' }
-repositories { mavenCentral() }
-dependencies { minecraft 'net.minecraftforge:forge:1.20.1-47.4.10' }
-jar.finalizedBy('reobfJar')
-
-jar { manifest { attributes('MixinConfigs': 'thaumic_create.mixins.json') } }
+base { archivesName = 'thaumic-create-neoforge-1.21.1' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+neoForge {
+    enable { version = '21.1.259'; disableRecompilation = true }
+    mods { thaumic_create { sourceSet sourceSets.main } }
+}
 
 
 
-dependencies { compileOnly fileTree(dir: 'libs', include: '*.jar') }
-
-if (providers.gradleProperty('verifyDevices').isPresent()) {
+// Opt-in real-server verification; validation classes never enter release JARs.
+if (providers.gradleProperty('verifyPress').isPresent()) {
     sourceSets.main.java.srcDir 'src/validation/java'
     sourceSets.main.resources.srcDir 'src/validation/resources'
-    dependencies {
-        implementation fileTree(dir:'build/validation-mods', include:'*.jar')
-        runtimeOnly fileTree(dir:'libs', include:'*.jar')
-    }
-    minecraft.runs {
-        gameTestServer {
-            workingDirectory file('build/validation-run')
-            property 'forge.enabledGameTestNamespaces', 'thaumic_create_tests'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', file('build/createSrgToMcp/output.srg').absolutePath
-            args '-mixin.config=thaumic_create.mixins.json'
-            mods { thaumic_create { source sourceSets.main } }
+    dependencies { implementation fileTree(dir: 'build/validation-mods', include: '*.jar'); compileOnly fileTree(dir: 'build/validation-compile', include: '*.jar') }
+    neoForge.runs {
+        pressGameTest {
+            type = 'gameTestServer'
+            gameDirectory = file('build/validation-run')
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'thaumic_create_tests'
         }
     }
 }
 jar { exclude 'com/thaumiccreate/validation/**', 'data/thaumic_create_tests/**' }
+
+dependencies { compileOnly fileTree(dir: localAddonDependencies, include: '*.jar') }

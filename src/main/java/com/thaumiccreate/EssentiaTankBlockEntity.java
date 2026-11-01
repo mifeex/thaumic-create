@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 
 /** Create connectivity, with a fixed capacity and an essentia-only inventory. */
 public final class EssentiaTankBlockEntity extends FluidTankBlockEntity {
@@ -24,11 +24,11 @@ public final class EssentiaTankBlockEntity extends FluidTankBlockEntity {
         if (overflow > 0) tankInventory.drain(overflow, FluidAction.EXECUTE);
         forceFluidLevelUpdate = true;
     }
-    @Override protected void read(CompoundTag tag, boolean packet) {
-        super.read(tag, packet);
+    @Override protected void read(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider, boolean packet) {
+        super.read(tag, provider, packet);
         tankInventory.setCapacity(Math.max(1, Math.min(40, getTotalTankSize())) * EssentiaFluid.BLOCK_CAPACITY);
         // Super reads Create's configurable capacity; restore the original payload after fixing ours.
-        if (isController() && tag.contains("TankContent")) tankInventory.readFromNBT(tag.getCompound("TankContent"));
+        if (isController() && tag.contains("TankContent")) tankInventory.readFromNBT(provider, tag.getCompound("TankContent"));
     }
     @Override public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> lines, boolean sneaking) {
         var controller = getControllerBE();

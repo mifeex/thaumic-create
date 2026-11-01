@@ -1,6 +1,6 @@
-# Thaumic Create — Forge 1.20.1
+# Thaumic Create — NeoForge 1.21.1
 
-Ветка `main` содержит только аддон для Minecraft 1.20.1.
+Ветка `neoforge/v1.21.1` содержит только аддон для Minecraft 1.21.1.
 
 | Ветка | Версия |
 |---|---|
@@ -12,19 +12,19 @@
 
 ## Сборка
 
-Требуется JDK 17.
+Требуется JDK 21.
 
 ```sh
 ./gradlew build
 ```
 
 При заполненном кэше Gradle: `./gradlew --offline build`.
-Результат: `build/libs/thaumic-create-forge-1.20.1-0.4.0.jar`.
+Результат: `build/libs/thaumic-create-neoforge-1.21.1-0.4.0.jar`.
 `python3 tools/build.py` собирает только текущую ветку.
 
-В `libs/` нужны compile-only JAR Create 6.0.8, TR API 2.0.9
+В `libs/` нужны compile-only JAR Create 6.0.10, TR API 2.0.9
 и вложенные библиотеки Create (Ponder, Registrate, Flywheel).
-Для Forge нужны зависимости в official mappings 1.20.1.
+Используются зависимости NeoForge 1.21.1.
 Локально зависимости подготовлены. В Git они не включены; при свежем клонировании
 их нужно предоставить отдельно. Они не упаковываются в JAR аддона.
 
@@ -52,11 +52,14 @@
 
 ## Проверки
 
-Серверные GameTest до перестройки: 7/7, включая двигатель.
-Команда: `./gradlew --offline -PverifyDevices runGameTestServer`.
-Тестовые зависимости должны быть подготовлены в `build/validation-mods`.
+Серверные GameTest до перестройки: 9/9, включая двигатель.
+Команда: `./gradlew --offline -PverifyPress runPressGameTest`.
+Тестовые зависимости должны быть подготовлены в `build/validation-mods` и `build/validation-compile`.
 Тестовые классы находятся в `src/validation` и исключены из релизного JAR.
 Сохранённые логи — в `docs/validation/`.
 
 При переходе со старого KubeJS-полуаддона отключите перенесённые определения
 камней, латуни и общей вкладки. Их прежние ID сохранены для совместимости прогресса.
+
+Локально ветка автоматически использует зависимости из .gradle/local-libs/neoforge-1.21.1.
+Переключение веток не требует ручной замены библиотек. Для свежего клона используется libs/.

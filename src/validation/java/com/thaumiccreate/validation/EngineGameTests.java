@@ -2,7 +2,7 @@ package com.thaumiccreate.validation;
 import com.thaumiccreate.*;
 import net.minecraft.core.*;
 import net.minecraft.gametest.framework.*;
-import net.minecraftforge.gametest.*;
+import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("thaumic_create_tests") @PrefixGameTestTemplate(false)
 public class EngineGameTests {
  @GameTest(template="empty",timeoutTicks=100)
@@ -24,7 +24,7 @@ public class EngineGameTests {
    base.rpm.setValue(128);base.addEssentia("potentia",8,Direction.WEST);
   });
   h.runAfterDelay(25,()->{h.assertTrue(top.getGeneratedSpeed()==128,"Maximum speed failed");h.assertTrue(base.storedQuarters()==0,"Maximum charge was not 8 units");
-   var saved=base.saveWithoutMetadata();base.load(saved);
+   var saved=base.saveWithoutMetadata(l.registryAccess());base.loadWithComponents(saved,l.registryAccess());
    h.assertTrue(base.rpm.getValue()==128,"Speed lost on save");h.succeed();
   });
  }

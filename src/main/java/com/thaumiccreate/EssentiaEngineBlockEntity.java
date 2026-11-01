@@ -77,6 +77,6 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
     public int minimumSuction(){return 0;}
     public int takeEssentia(String aspect,int amount,Direction side){return 0;}
     public int addEssentia(String aspect,int amount,Direction side){if(!canInputFrom(side)||!"potentia".equals(aspect)||amount<=0)return 0;int accepted=Math.min(amount,(256-fuelQuarters)/4);fuelQuarters+=accepted*4;setChanged();if(level!=null&&!level.isClientSide)sendData();return accepted;}
-    @Override protected void read(CompoundTag tag,boolean packet){super.read(tag,packet);fuelQuarters=Math.max(0,Math.min(256,tag.getInt("FuelQuarters")));paidTicks=Math.max(0,Math.min(10,tag.getInt("PaidTicks")));paidRpm=Math.max(0,Math.min(128,tag.getInt("PaidRpm")));}
-    @Override public void write(CompoundTag tag,boolean packet){super.write(tag,packet);tag.putInt("FuelQuarters",fuelQuarters);tag.putInt("PaidTicks",paidTicks);tag.putInt("PaidRpm",paidRpm);}
+    @Override protected void read(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.read(tag,provider,packet);fuelQuarters=Math.max(0,Math.min(256,tag.getInt("FuelQuarters")));paidTicks=Math.max(0,Math.min(10,tag.getInt("PaidTicks")));paidRpm=Math.max(0,Math.min(128,tag.getInt("PaidRpm")));}
+    @Override public void write(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.write(tag,provider,packet);tag.putInt("FuelQuarters",fuelQuarters);tag.putInt("PaidTicks",paidTicks);tag.putInt("PaidRpm",paidRpm);}
 }

@@ -26,6 +26,7 @@ public final class EssentiaAdapterBlock extends BaseEntityBlock {
         super(BlockBehaviour.Properties.of().strength(3).sound(SoundType.NETHERITE_BLOCK).noOcclusion());
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(IMPORTING, false));
     }
+    @Override protected com.mojang.serialization.MapCodec<? extends BaseEntityBlock> codec() { return simpleCodec(p -> new EssentiaAdapterBlock()); }
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<net.minecraft.world.level.block.Block, BlockState> builder) { builder.add(FACING, IMPORTING); }
     @Override public BlockState getStateForPlacement(BlockPlaceContext ctx) { return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite()); }
     @Override public RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }
@@ -33,13 +34,17 @@ public final class EssentiaAdapterBlock extends BaseEntityBlock {
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : createTickerHelper(type, DeviceRegistry.ADAPTER_ENTITY.get(), EssentiaAdapterBlockEntity::tick);
     }
-    @Override public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    @Override protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        toggle(state, level, pos, player); return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+    }
+    @Override protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         toggle(state, level, pos, player); return InteractionResult.sidedSuccess(level.isClientSide);
     }
     private void toggle(BlockState state, Level level, BlockPos pos, Player player) {
         if (level.isClientSide) return;
         if (player.isShiftKeyDown()) {
             state = state.cycle(IMPORTING); level.setBlockAndUpdate(pos, state);
+            level.invalidateCapabilities(pos);
         }
         var be = (EssentiaAdapterBlockEntity) level.getBlockEntity(pos);
         String aspect = EssentiaFluid.aspect(be.buffer.getFluid());

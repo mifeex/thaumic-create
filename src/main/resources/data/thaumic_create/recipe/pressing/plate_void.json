@@ -7,8 +7,8 @@
   ],
   "results": [
     {
-      "item": "thaumic_create:plate_void",
-      "count": 1
+      "count": 1,
+      "id": "thaumic_create:plate_void"
     }
   ]
 }

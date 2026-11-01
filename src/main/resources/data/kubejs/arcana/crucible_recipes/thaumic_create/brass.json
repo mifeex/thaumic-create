@@ -1,7 +1,7 @@
 {
   "research": "create_brass_transmutation",
   "catalyst": {
-    "tag": "thaumic_create:ingots/lead"
+    "tag": "c:ingots/lead"
   },
   "output": {
     "item": "create:brass_ingot",

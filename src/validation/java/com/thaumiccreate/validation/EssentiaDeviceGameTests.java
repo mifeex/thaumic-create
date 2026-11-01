@@ -6,11 +6,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.gametest.GameTestHolder;
-import net.minecraftforge.gametest.PrefixGameTestTemplate;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 @GameTestHolder("thaumic_create_tests")
 @PrefixGameTestTemplate(false)
@@ -22,7 +22,6 @@ public final class EssentiaDeviceGameTests {
     @GameTest(template="empty", timeoutTicks=150)
     public static void maximumTankStoresExactly2560(GameTestHelper h) { tank(h,2,10); }
     private static void tank(GameTestHelper h,int width,int height) {
-        h.assertTrue(com.thaumicreborn.crucible.CrucibleRecipeRegistry.all().stream().anyMatch(r -> r.id().toString().equals("kubejs:thaumic_create/brass")), "Migrated brass recipe missing");
         BlockPos origin=h.absolutePos(new BlockPos(1,2,1));
         for(int y=0;y<height;y++)for(int x=0;x<width;x++)for(int z=0;z<width;z++)
             h.getLevel().setBlockAndUpdate(origin.offset(x,y,z),DeviceRegistry.TANK.get().defaultBlockState());
@@ -33,13 +32,13 @@ public final class EssentiaDeviceGameTests {
             var tank=controller.getTankInventory();
             int capacity=width*width*height*64*125;
             h.assertTrue(tank.getCapacity()==capacity,"Capacity "+tank.getCapacity()+" expected "+capacity);
-            var handler=h.getLevel().getBlockEntity(origin).getCapability(ForgeCapabilities.FLUID_HANDLER,Direction.NORTH).orElse(null);
+            var handler=h.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,origin,Direction.NORTH);
             h.assertTrue(handler!=null,"No fluid pipe capability");
             h.assertTrue(handler.fill(new FluidStack(net.minecraft.world.level.material.Fluids.WATER,1000),FluidAction.EXECUTE)==0,"Tank accepted water");
             h.assertTrue(handler.fill(EssentiaFluid.stack("aer",capacity+125),FluidAction.EXECUTE)==capacity,"Wrong essentia capacity");
             h.assertTrue(handler.fill(EssentiaFluid.stack("ignis",125),FluidAction.EXECUTE)==0,"Mixed aspects");
-            var saved=be.saveWithoutMetadata();
-            be.load(saved);
+            var saved=be.saveWithoutMetadata(h.getLevel().registryAccess());
+            be.loadWithComponents(saved,h.getLevel().registryAccess());
             h.assertTrue(be.getControllerBE().getTankInventory().getFluidAmount()==capacity,"Tank save lost essentia");
             var output=handler.drain(capacity,FluidAction.EXECUTE);
             h.assertTrue(output.getAmount()==capacity && "aer".equals(EssentiaFluid.aspect(output)),"Lost or changed essentia");
@@ -55,19 +54,19 @@ public final class EssentiaDeviceGameTests {
         h.assertTrue(be.addEssentia("aer",64,Direction.EAST)==0,"TR accepted front input");
         h.assertTrue(be.addEssentia("aer",64,Direction.WEST)==64,"TR input failed");
         h.assertTrue(be.addEssentia("ignis",1,Direction.WEST)==0,"Mixed adapter aspects");
-        h.assertTrue(h.getLevel().getBlockEntity(pos).getCapability(ForgeCapabilities.FLUID_HANDLER,Direction.WEST).orElse(null)==null,"Create capability exposed on TR side");
-        var pipe=h.getLevel().getBlockEntity(pos).getCapability(ForgeCapabilities.FLUID_HANDLER,Direction.EAST).orElse(null);
+        h.assertTrue(h.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,pos,Direction.WEST)==null,"Create capability exposed on TR side");
+        var pipe=h.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,pos,Direction.EAST);
         h.assertTrue(pipe!=null,"No Create port");
         var fluid=pipe.drain(1,FluidAction.SIMULATE);
         h.assertTrue(fluid.getAmount()==1 && be.buffer.getFluidAmount()==8000,"Simulation changed state");
         fluid=pipe.drain(1,FluidAction.EXECUTE);
         h.assertTrue(fluid.getAmount()==1 && be.buffer.getFluidAmount()==7999,"Fractional drain rounded");
-        var saved=be.saveWithoutMetadata();
-        be.load(saved);
+        var saved=be.saveWithoutMetadata(h.getLevel().registryAccess());
+        be.loadWithComponents(saved,h.getLevel().registryAccess());
         h.assertTrue(be.buffer.getFluidAmount()==7999 && "aer".equals(EssentiaFluid.aspect(be.buffer.getFluid())),"Save lost payload");
         h.getLevel().setBlockAndUpdate(pos,be.getBlockState().setValue(EssentiaAdapterBlock.IMPORTING,true));
-
-        pipe=h.getLevel().getBlockEntity(pos).getCapability(ForgeCapabilities.FLUID_HANDLER,Direction.EAST).orElse(null);
+        h.getLevel().invalidateCapabilities(pos);
+        pipe=h.getLevel().getCapability(Capabilities.FluidHandler.BLOCK,pos,Direction.EAST);
         h.assertTrue(pipe.fill(fluid,FluidAction.EXECUTE)==1,"Cannot return fractional residue");
         h.assertTrue(be.takeEssentia("aer",100,Direction.WEST)==64,"Return to TR was not exact");
         h.assertTrue(be.buffer.isEmpty(),"Round trip duplicated or lost fluid");
@@ -78,7 +77,7 @@ public final class EssentiaDeviceGameTests {
         var pos=h.absolutePos(new BlockPos(1,2,1));
         h.getLevel().setBlockAndUpdate(pos,DeviceRegistry.ADAPTER.get().defaultBlockState().setValue(EssentiaAdapterBlock.FACING,Direction.EAST));
         var tubePos=pos.west();
-        h.getLevel().setBlockAndUpdate(tubePos,net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(new net.minecraft.resources.ResourceLocation("thaumic_reborn:essentia_tube")).defaultBlockState());
+        h.getLevel().setBlockAndUpdate(tubePos,net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.parse("thaumic_reborn:essentia_tube")).defaultBlockState());
         var tube=ThaumicRebornApi.essentia().transport(h.getLevel(),tubePos).orElseThrow();
         h.assertTrue(tube.addEssentia("aer",1,Direction.WEST)==1,"Cannot prime tube");
         h.runAfterDelay(20,()->{

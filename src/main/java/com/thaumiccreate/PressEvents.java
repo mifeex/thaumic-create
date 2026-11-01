@@ -1,8 +1,8 @@
 package com.thaumiccreate;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public final class PressEvents {
     private PressEvents() {}
