@@ -33,5 +33,6 @@
   "engine.thaumic_create.speed": "Speed and essentia consumption",
   "research.thaumic_create.engine.body": "Supply Potentia to the base and connect shafts to the sides of the upper part.<BR><BR>Hold right-click on the front panel to select 1–128 RPM. Fuel is paid every 10 ticks, preserving fractional units. Speed changes apply at the next paid interval. Starts at 8 RPM for 0.5 Potentia per 10 ticks. Aspect selection is not enabled.",
   "itemGroup.thaumic_create": "Thaumic Create",
-  "research.thaumic_create.art_of_alchemy.reference": "This is a reference to The Art of Alchemy. Complete the original research in the Alchemy chapter; no additional research or purchase is required here."
+  "research.thaumic_create.art_of_alchemy.reference": "This is a reference to The Art of Alchemy. Complete the original research in the Alchemy chapter; no additional research or purchase is required here.",
+  "engine.thaumic_create.fuel_rate": "Consumption: %s Potentia / 10 ticks"
 }

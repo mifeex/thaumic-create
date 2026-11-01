@@ -31,9 +31,9 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
             protected boolean isSideActive(BlockState state,Direction side){return side==state.getValue(EssentiaEngineBlock.HORIZONTAL_FACING);}
         }) {
             @Override public ValueSettingsBoard createBoard(net.minecraft.world.entity.player.Player player,net.minecraft.world.phys.BlockHitResult hit) {
-                return new ValueSettingsBoard(label,128,8,List.of(Component.literal("RPM")),new ValueSettingsFormatter(v->Component.literal(v.value()+" RPM | "+costText(Math.max(1,v.value()))+" Potentia / 10t")));
+                return new ValueSettingsBoard(label,128,8,List.of(Component.literal("RPM")),new EngineSpeedFormatter());
             }
-        }.between(1,128).withFormatter(v->v+" RPM | "+costText(v)+" Potentia / 10t").withCallback(v->{
+        }.between(1,128).withFormatter(v->v+" RPM").withCallback(v->{
             if(level==null||level.isClientSide)return;
             var b=base();if(b!=null&&b!=this&&b.rpm.getValue()!=v)b.rpm.setValue(v);
             setChanged();sendData();
