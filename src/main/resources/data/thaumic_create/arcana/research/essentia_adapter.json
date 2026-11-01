@@ -1,8 +1,12 @@
 {
+  "node_style": {"frame": "primary", "special": false},
+  "purchase_cost": [],
+
   "id": "create_essentia_adapter",
   "category": "create",
   "icon": "thaumic_create:essentia_adapter",
   "title": "research.thaumic_create.essentia_adapter.title",
+  "subtitle": "research.thaumic_create.essentia_adapter.subtitle",
   "parents": [
     "create_plate_thaumium"
   ],
@@ -24,8 +28,8 @@
   "details": {
     "complexity": 1
   },
-  "x": -56,
-  "y": 168,
+  "x": 93,
+  "y": -21,
   "pages": [
     {
       "type": "text",

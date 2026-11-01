@@ -1,9 +1,12 @@
 {
+  "node_style": {"frame": "primary", "special": false},
+  "purchase_cost": [],
+
   "id": "create_brass_transmutation",
   "category": "create",
   "icon": "create:brass_ingot",
-  "title": "research.kubejs.thaumic_create.brass.title",
-  "subtitle": "research.kubejs.thaumic_create.brass.subtitle",
+  "title": "research.thaumic_create.brass.title",
+  "subtitle": "research.thaumic_create.brass.subtitle",
   "parents": [
     "create_integration",
     "create_art_of_alchemy"
@@ -37,16 +40,16 @@
   "details": {
     "complexity": 1
   },
-  "x": 0,
-  "y": 40,
+  "x": -77,
+  "y": -77,
   "pages": [
     {
       "type": "text",
-      "body": "research.kubejs.thaumic_create.brass.body"
+      "body": "research.thaumic_create.brass.body"
     },
     {
       "type": "recipe",
-      "recipe": "kubejs:thaumic_create/brass"
+      "recipe": "thaumic_create:brass"
     }
   ]
 }

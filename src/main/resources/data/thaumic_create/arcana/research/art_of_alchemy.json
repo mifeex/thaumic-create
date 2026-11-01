@@ -10,12 +10,28 @@
   "hidden_parents": [
     "alchemicalmanufacture"
   ],
-  "x": -112,
-  "y": -80,
+  "x": -152,
+  "y": -82,
   "pages": [
     {
       "type": "text",
-      "body": "research.thaumic_create.art_of_alchemy.reference"
+      "title": "",
+      "body": "tc.research_page.ALCHEMICALMANUFACTURE.1"
+    },
+    {
+      "type": "recipe",
+      "title": "",
+      "recipe": "thaumic_reborn:altweb"
+    },
+    {
+      "type": "recipe",
+      "title": "",
+      "recipe": "thaumic_reborn:altmossycobble"
+    },
+    {
+      "type": "recipe",
+      "title": "",
+      "recipe": "thaumic_reborn:altice"
     }
   ]
 }

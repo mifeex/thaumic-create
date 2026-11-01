@@ -1,8 +1,12 @@
 {
+  "node_style": {"frame": "hidden", "special": false},
+  "purchase_cost": [],
+
   "id": "create_essentia_engine",
   "category": "create",
   "icon": "thaumic_create:essentia_engine",
   "title": "research.thaumic_create.engine.title",
+  "subtitle": "research.thaumic_create.engine.subtitle",
   "parents": [
     "create_brass_transmutation",
     "create_plate_thaumium"
@@ -22,10 +26,10 @@
     }
   ],
   "details": {
-    "complexity": 1
+    "complexity": 2
   },
-  "x": 112,
-  "y": 168,
+  "x": -6,
+  "y": -30,
   "pages": [
     {
       "type": "text",

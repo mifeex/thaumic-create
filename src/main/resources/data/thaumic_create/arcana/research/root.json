@@ -1,0 +1,22 @@
+{
+  "node_style": {"frame": "primary", "special": true},
+  "purchase_cost": [],
+  "details": {"complexity": 1},
+  "research_cost": [],
+
+  "id": "create_integration",
+  "category": "create",
+  "icon": "create:cogwheel",
+  "title": "research.thaumic_create.root.title",
+  "subtitle": "research.thaumic_create.root.subtitle",
+  "parents": [],
+  "auto_unlock": true,
+  "x": -9,
+  "y": -126,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.root.body"
+    }
+  ]
+}

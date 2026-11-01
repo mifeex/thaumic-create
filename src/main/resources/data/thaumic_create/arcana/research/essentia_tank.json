@@ -1,8 +1,12 @@
 {
+  "node_style": {"frame": "primary", "special": false},
+  "purchase_cost": [],
+
   "id": "create_essentia_tank",
   "category": "create",
   "icon": "thaumic_create:essentia_tank",
   "title": "research.thaumic_create.essentia_tank.title",
+  "subtitle": "research.thaumic_create.essentia_tank.subtitle",
   "parents": [
     "create_essentia_adapter"
   ],
@@ -22,10 +26,10 @@
     }
   ],
   "details": {
-    "complexity": 1
+    "complexity": 2
   },
-  "x": -56,
-  "y": 232,
+  "x": 93,
+  "y": 43,
   "pages": [
     {
       "type": "text",

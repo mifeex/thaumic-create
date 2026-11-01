@@ -85,4 +85,114 @@ public class EngineGameTests {
    h.succeed();
   });
  }
+
+ @GameTest(template="empty",timeoutTicks=180)
+ public static void engineNeverStopsBetweenFuelPayments(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  h.runAfterDelay(2,()->((EssentiaEngineBlockEntity)l.getBlockEntity(p)).addEssentia("potentia",64,Direction.DOWN));
+  for(int tick=4;tick<=130;tick++){
+   final int sampled=tick;
+   h.runAfterDelay(tick,()->{
+    var top=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+    h.assertTrue(top.getGeneratedSpeed()==8&&top.getSpeed()==8,"Rotation interrupted at tick "+sampled+": generated="+top.getGeneratedSpeed()+", actual="+top.getSpeed());
+   });
+  }
+  h.runAfterDelay(132,h::succeed);
+ }
+
+ @GameTest(template="empty",timeoutTicks=100)
+ public static void engineUsesLastSixPotentiaAtMaximumSpeed(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  h.runAfterDelay(2,()->{
+   var base=(EssentiaEngineBlockEntity)l.getBlockEntity(p);base.rpm.setValue(128);
+   base.addEssentia("potentia",6,Direction.DOWN);
+  });
+  for(int tick=4;tick<=9;tick++){
+   final int sampled=tick;
+   h.runAfterDelay(tick,()->{
+    var top=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+    h.assertTrue(top.getGeneratedSpeed()==128&&top.getSpeed()==128,"Remaining fuel not used at tick "+sampled);
+   });
+  }
+  h.runAfterDelay(15,()->{
+   var base=(EssentiaEngineBlockEntity)l.getBlockEntity(p);var top=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+   h.assertTrue(base.storedQuarters()==0,"Fuel remained stranded");
+   h.assertTrue(top.getGeneratedSpeed()==0&&top.getSpeed()==0,"Empty engine still rotating");
+   var saved=base.saveWithoutMetadata(l.registryAccess());
+   h.assertTrue(saved.getInt("PaidEnergy")==-16,"Partial tick accounting lost precision");
+   base.loadWithComponents(saved,l.registryAccess());
+   h.assertTrue(base.saveWithoutMetadata(l.registryAccess()).getInt("PaidEnergy")==-16,"Saved fractional balance changed");
+   h.succeed();
+  });
+ }
+ @GameTest(template="empty",timeoutTicks=120)
+ public static void maximumSpeedRemainsContinuousWithEnoughFuel(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  h.runAfterDelay(2,()->{var base=(EssentiaEngineBlockEntity)l.getBlockEntity(p);base.rpm.setValue(128);base.addEssentia("potentia",64,Direction.DOWN);});
+  for(int tick=4;tick<=80;tick++){
+   final int sampled=tick;
+   h.runAfterDelay(tick,()->{
+    var top=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+    h.assertTrue(top.getGeneratedSpeed()==128&&top.getSpeed()==128,"Maximum rotation interrupted at tick "+sampled);
+   });
+  }
+  h.runAfterDelay(82,h::succeed);
+ }
+
+ @GameTest(template="empty",timeoutTicks=120)
+ public static void engineBulkLoadsReplacementJarsAndRefillsWithoutOverflow(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  var jarPos=p.below();
+  Runnable freshJar=()->{
+   l.setBlockAndUpdate(jarPos,net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
+   l.setBlockAndUpdate(jarPos,com.thaumicreborn.registry.ModBlocks.WARDED_JAR.get().defaultBlockState());
+   var payload=new net.minecraft.nbt.CompoundTag();payload.putString("Aspect","potentia");payload.putInt("Amount",64);
+   l.getBlockEntity(jarPos).loadWithComponents(payload,l.registryAccess());
+  };
+  freshJar.run();
+  for(int replacement=0;replacement<4;replacement++){
+   final int count=replacement+1;
+   if(replacement>0)h.runAfterDelay(replacement*4,()->freshJar.run());
+   h.runAfterDelay(replacement*4+3,()->{
+    var source=(com.thaumicreborn.api.essentia.EssentiaTransport)l.getBlockEntity(jarPos);
+    var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);
+    h.assertTrue(source.essentiaAmount(Direction.UP)==0,"Jar "+count+" was not drained in bulk");
+    h.assertTrue(engine.storedEssentia()>count*64-1,"Reserve did not accumulate jar "+count+": "+engine.storedEssentia());
+   });
+  }
+  h.runAfterDelay(16,()->freshJar.run());
+  for(int tick=17;tick<=60;tick++)h.runAfterDelay(tick,()->{
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);
+   h.assertTrue(engine.storedEssentia()<=256,"Reserve exceeded 256 including prepaid fuel");
+  });
+  h.runAfterDelay(60,()->{
+   var source=(com.thaumicreborn.api.essentia.EssentiaTransport)l.getBlockEntity(jarPos);
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);
+   h.assertTrue(source.essentiaAmount(Direction.UP)<64,"No automatic top-up after consuming reserve");
+   h.assertTrue(engine.storedEssentia()>254,"Reserve was not kept topped up");
+   var saved=engine.saveWithoutMetadata(l.registryAccess());double before=engine.storedEssentia();
+   engine.loadWithComponents(saved,l.registryAccess());
+   h.assertTrue(engine.storedEssentia()==before,"Reserve changed on save/load");
+   h.succeed();
+  });
+ }
+ @GameTest(template="empty",timeoutTicks=50)
+ public static void engineReserveCapIncludesPaidFuel(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  h.runAfterDelay(2,()->{
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);engine.rpm.setValue(128);
+   h.assertTrue(engine.addEssentia("potentia",1000,Direction.DOWN)==256,"Wrong initial reserve capacity");
+  });
+  h.runAfterDelay(3,()->{
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);
+   h.assertTrue(engine.storedEssentia()<=256,"Paid interval exceeds total cap");
+   h.assertTrue(engine.addEssentia("potentia",8,Direction.DOWN)==0,"Prepaid fuel not counted towards reserve");
+   h.succeed();
+  });
+ }
 }

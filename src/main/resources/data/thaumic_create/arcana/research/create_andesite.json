@@ -1,8 +1,13 @@
 {
+  "node_style": {"frame": "secondary", "special": false},
+  "details": {"complexity": 1},
+  "research_cost": [],
+
   "id": "create_andesite",
   "category": "create",
   "icon": "minecraft:andesite",
-  "title": "research.kubejs.thaumic_create.create_andesite.title",
+  "title": "research.thaumic_create.create_andesite.title",
+  "subtitle": "research.thaumic_create.create_andesite.subtitle",
   "parents": [
     "create_art_of_alchemy"
   ],
@@ -20,16 +25,16 @@
       "amount": 5
     }
   ],
-  "x": 0,
-  "y": -24,
+  "x": -145,
+  "y": 2,
   "pages": [
     {
       "type": "text",
-      "body": "research.kubejs.thaumic_create.create_andesite.body"
+      "body": "research.thaumic_create.create_andesite.body"
     },
     {
       "type": "recipe",
-      "recipe": "kubejs:thaumic_create/create_andesite"
+      "recipe": "thaumic_create:create_andesite"
     }
   ]
 }

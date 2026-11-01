@@ -1,8 +1,13 @@
 {
+  "node_style": {"frame": "secondary", "special": false},
+  "details": {"complexity": 1},
+  "research_cost": [],
+
   "id": "create_plate_thaumium",
   "category": "create",
   "icon": "thaumic_create:plate_thaumium",
   "title": "research.thaumic_create.plate_thaumium.title",
+  "subtitle": "research.thaumic_create.plate_thaumium.subtitle",
   "parents": [
     "create_integration",
     "thaumium"
@@ -22,8 +27,8 @@
       "amount": 2
     }
   ],
-  "x": -56,
-  "y": 104,
+  "x": 69,
+  "y": -80,
   "pages": [
     {
       "type": "text",
