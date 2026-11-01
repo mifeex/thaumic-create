@@ -1,0 +1,150 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Task :compileJava
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/ThaumicCreate.java:17: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+    public ThaumicCreate() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); DeviceRegistry.register(FMLJavaModLoadingContext.get().getModEventBus()); ModCreativeTabs.register(FMLJavaModLoadingContext.get().getModEventBus()); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::placed); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::interact); }
+                                                                    ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/ThaumicCreate.java:17: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+    public ThaumicCreate() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); DeviceRegistry.register(FMLJavaModLoadingContext.get().getModEventBus()); ModCreativeTabs.register(FMLJavaModLoadingContext.get().getModEventBus()); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::placed); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::interact); }
+                                                                                                                                              ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/ThaumicCreate.java:17: warning: [removal] get() in FMLJavaModLoadingContext has been deprecated and marked for removal
+    public ThaumicCreate() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); DeviceRegistry.register(FMLJavaModLoadingContext.get().getModEventBus()); ModCreativeTabs.register(FMLJavaModLoadingContext.get().getModEventBus()); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::placed); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::interact); }
+                                                                                                                                                                                                                         ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/DeviceClient.java:10: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            public ResourceLocation getStillTexture() { return new ResourceLocation("minecraft", "block/water_still"); }
+                                                               ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/DeviceClient.java:11: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+            public ResourceLocation getFlowingTexture() { return new ResourceLocation("minecraft", "block/water_flow"); }
+                                                                 ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/DeviceClient.java:25: warning: [removal] setRenderLayer(Block,RenderType) in ItemBlockRenderTypes has been deprecated and marked for removal
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ENGINE.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
+                                                              ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/DeviceClient.java:26: warning: [removal] setRenderLayer(Block,RenderType) in ItemBlockRenderTypes has been deprecated and marked for removal
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.TANK.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
+                                                              ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/DeviceClient.java:27: warning: [removal] setRenderLayer(Block,RenderType) in ItemBlockRenderTypes has been deprecated and marked for removal
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ADAPTER.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
+                                                              ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/TankConnectedTextures.java:21: warning: [removal] ResourceLocation(String,String) in ResourceLocation has been deprecated and marked for removal
+        return new ResourceLocation(ThaumicCreate.ID, "block/" + name);
+               ^
+/private/tmp/thaumic-create-engine-fix/forge-worktree/src/validation/java/com/thaumiccreate/validation/EssentiaDeviceGameTests.java:81: warning: [removal] ResourceLocation(String) in ResourceLocation has been deprecated and marked for removal
+        h.getLevel().setBlockAndUpdate(tubePos,net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(new net.minecraft.resources.ResourceLocation("thaumic_reborn:essentia_tube")).defaultBlockState());
+                                                                                                         ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /private/tmp/thaumic-create-engine-fix/forge-worktree/src/main/java/com/thaumiccreate/EssentiaTankBlockEntity.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+10 warnings
+
+> Task :processResources
+> Task :classes
+> Task :downloadMcpConfig
+> Task :extractSrg UP-TO-DATE
+> Task :createSrgToMcp UP-TO-DATE
+> Task :downloadMCMeta UP-TO-DATE
+> Task :downloadAssets UP-TO-DATE
+> Task :extractNatives UP-TO-DATE
+> Task :makeSrcDirs
+> Task :prepareRuns
+> Task :prepareRunGameTestServer
+> Task :prepareRunGameTestServerCompile
+
+> Task :runGameTestServer
+2026-11-01 18:49:38,840 main WARN Advanced terminal features are not available in this environment
+[18:49:38] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgegametestserveruserdev, --gameDir, ., --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, -mixin.config=thaumic_create.mixins.json]
+[18:49:38] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Oracle Corporation; OS Mac OS X arch aarch64 version 26.6.2
+[18:49:38] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgegametestserveruserdev
+[18:49:38] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/Users/evgenii/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23121!/ Service=ModLauncher Env=SERVER
+[18:49:39] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/evgenii/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.20.1-47.4.10/ccc533c7dd67e0983217197d7549c8b49e7ab453/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[18:49:39] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/evgenii/.gradle/caches/modules-2/files-2.1/net.minecraftforge/lowcodelanguage/1.20.1-47.4.10/e9a2879fe3612ea34b9728ec2633304a1e67d480/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[18:49:39] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/evgenii/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.20.1-47.4.10/ec5cefbbc65c67302b8fac317010faab85fa14b9/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[18:49:39] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /Users/evgenii/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.20.1-47.4.10/94dae566be650566ea9115a1414ab76bfcf5a804/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[18:49:39] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/forge-1.20.1/mixinextras-forge-0.4.1.jar
+[18:49:39] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: flywheel. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/forge-1.20.1/flywheel-forge-1.20.1-1.0.5.jar
+[18:49:39] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: Registrate-MC1.20-1.3.3.jar. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/forge-1.20.1/Registrate-MC1.20-1.3.3.jar
+[18:49:39] [main/WARN] [ne.mi.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/forge-1.20.1/Ponder-Forge-1.20.1-1.0.91.jar
+[18:49:39] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[18:49:40] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[18:49:40] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgegametestserveruserdev' with arguments [--gameDir, .]
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap backend-flywheel.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap flywheel.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap ponder.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap ponder.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap create.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/INFO] [mixin/]: Remapping refMap thaumic_reborn.refmap.json using /private/tmp/thaumic-create-engine-fix/forge-worktree/build/createSrgToMcp/output.srg
+[18:49:41] [main/WARN] [mixin/]: Error loading class: tallestegg/guardvillagers/entities/Guard (java.lang.ClassNotFoundException: tallestegg.guardvillagers.entities.Guard)
+[18:49:41] [main/WARN] [mixin/]: Error loading class: dev/worldgen/lithostitched/worldgen/structure/AlternateJigsawGenerator$StructurePoolGenerator (java.lang.ClassNotFoundException: dev.worldgen.lithostitched.worldgen.structure.AlternateJigsawGenerator$StructurePoolGenerator)
+[18:49:41] [main/WARN] [mixin/]: Error loading class: com/terraformersmc/biolith/impl/biome/DimensionBiomePlacement (java.lang.ClassNotFoundException: com.terraformersmc.biolith.impl.biome.DimensionBiomePlacement)
+[18:49:41] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[18:49:46] [modloading-worker-0/INFO] [co.si.cr.Create/]: Create 6.0.8 initializing! Commit hash: 1a1a9a2819b4f89f78caec41b55ed8cb222fa24b
+[18:49:46] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[18:49:46] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[18:49:48] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[18:49:49] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[18:49:49] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[18:49:50] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/Users/evgenii/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1.jar%23184!/assets/.mcassetsroot' uses unexpected schema
+[18:49:50] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/Users/evgenii/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.10_mapped_official_1.20.1/forge-1.20.1-47.4.10_mapped_official_1.20.1.jar%23184!/data/.mcassetsroot' uses unexpected schema
+[18:49:50] [main/INFO] [co.si.cr.Create/]: Created 169 recipes which will be injected into the game
+[18:49:50] [main/INFO] [co.si.cr.Create/]: Created 0 tags which will be injected into the game
+[18:49:50] [main/INFO] [co.th.ThaumicReborn/]: Installing CLASSIC Overworld regional markers (Magical Forest weight 5, Tainted Lands weight 2, region sizes 120/160 quarts); existing mod mappings are forwarded unchanged
+[18:49:51] [main/INFO] [minecraft/RecipeManager]: Loaded 23 recipes
+[18:49:51] [main/INFO] [minecraft/AdvancementList]: Loaded 2399 advancements
+[18:49:51] [main/INFO] [to.th.cu.Curios/]: Loaded 10 curio slots
+[18:49:51] [main/INFO] [to.th.cu.Curios/]: Loaded 1 curio entities
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 48 aspect definitions; skipped 0 inactive definitions
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 59 active Crucible recipes
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 89 infusion recipes
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 1076 explicit scan definitions; skipped 23 inactive definitions; automatic fallback is disabled (saved inferred scan keys remain readable)
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 7 research category definitions; skipped 0 inactive definitions
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 216 research definitions; 0 have inactive gameplay content
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 19 wand rods and 6 wand caps
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 6 classic construction definitions
+[18:49:51] [main/INFO] [co.th.ThaumicReborn/]: Loaded 1 essentia transport definitions
+[18:49:52] [main/INFO] [ne.mi.ga.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [thaumic_create_tests]
+[18:49:52] [Server thread/INFO] [co.th.ThaumicReborn/]: Resolved CLASSIC Overworld biome holders from the server registry
+[18:49:53] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[18:49:55] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:49:55] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:49:55] [Worker-Main-7/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:49:55] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[18:49:55] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 18%
+[18:49:56] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 2387 ms
+[18:49:56] [Server thread/INFO] [minecraft/GameTestServer]: Started game test server
+[18:49:56] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[18:49:56] [Server thread/INFO] [minecraft/GameTestBatchRunner]: Running test batch 'defaultBatch:1' (16 tests)...
+[18:49:56] [Server thread/INFO] [minecraft/GameTestServer]: 16 tests are now running!
+[18:49:57] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_++______+]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++_+_+]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++_+_+]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++_+_+]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++_+_+]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++_+++]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++++++++]
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: ========= 16 GAME TESTS COMPLETE ======================
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: All 16 required tests passed :)
+[18:49:58] [Server thread/INFO] [minecraft/GameTestServer]: ====================================================
+[18:49:58] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[18:49:58] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[18:49:58] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[18:49:59] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/thaumic_reborn:outer_lands
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (outer_lands): All chunks are saved
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[18:50:00] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[18:50:01] [Server thread/INFO] [minecraft/GameTestServer]: Game test server shutting down
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.8/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 35s
+10 actionable tasks: 5 executed, 5 up-to-date

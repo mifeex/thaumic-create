@@ -4,7 +4,8 @@
   "package": "com.thaumiccreate.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MechanicalPressMixin"
+    "MechanicalPressMixin",
+    "EngineCogConnectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

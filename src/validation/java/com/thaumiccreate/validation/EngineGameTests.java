@@ -48,4 +48,41 @@ public class EngineGameTests {
    h.succeed();
   });
  }
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesSmallCogNorth(GameTestHelper h){checkCogMesh(h,Direction.NORTH,false);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesLargeCogNorth(GameTestHelper h){checkCogMesh(h,Direction.NORTH,true);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesSmallCogEast(GameTestHelper h){checkCogMesh(h,Direction.EAST,false);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesLargeCogEast(GameTestHelper h){checkCogMesh(h,Direction.EAST,true);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesSmallCogSouth(GameTestHelper h){checkCogMesh(h,Direction.SOUTH,false);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesLargeCogSouth(GameTestHelper h){checkCogMesh(h,Direction.SOUTH,true);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesSmallCogWest(GameTestHelper h){checkCogMesh(h,Direction.WEST,false);}
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void engineMeshesLargeCogWest(GameTestHelper h){checkCogMesh(h,Direction.WEST,true);}
+ private static void checkCogMesh(GameTestHelper h,Direction facing,boolean large){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));
+  var state=DeviceRegistry.ENGINE.get().defaultBlockState().setValue(EssentiaEngineBlock.HORIZONTAL_FACING,facing);
+  var upper=state.setValue(EssentiaEngineBlock.UPPER,true);
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),upper);
+  var engineAxis=DeviceRegistry.ENGINE.get().getRotationAxis(upper);
+  var cogAxis=large ? facing.getAxis() : engineAxis;
+  var cogPos=p.above(2);
+  var cog=(large ? com.simibubi.create.AllBlocks.LARGE_COGWHEEL : com.simibubi.create.AllBlocks.COGWHEEL).getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS,cogAxis);
+  h.assertTrue(cog.canSurvive(l,cogPos),"Cog placement rejected above engine");
+  l.setBlockAndUpdate(cogPos,cog);
+  h.assertTrue(!net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(upper.getCollisionShape(l,p.above()),com.simibubi.create.AllShapes.SPEED_CONTROLLER,net.minecraft.world.phys.shapes.BooleanOp.NOT_SAME),"Wrong cog clearance");
+  h.runAfterDelay(2,()->((EssentiaEngineBlockEntity)l.getBlockEntity(p)).addEssentia("potentia",16,Direction.DOWN));
+  h.runAfterDelay(12,()->{
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+   var cogBe=(com.simibubi.create.content.kinetics.base.KineticBlockEntity)l.getBlockEntity(cogPos);
+   h.assertTrue(cogBe!=null&&cogBe.getSpeed()==(large ? 8 : -8),"Cog teeth not driven by engine");
+   h.assertTrue(com.simibubi.create.content.kinetics.RotationPropagator.isConnected(engine,cogBe)&&com.simibubi.create.content.kinetics.RotationPropagator.isConnected(cogBe,engine),"Cog mesh not symmetric");
+   h.succeed();
+  });
+ }
 }

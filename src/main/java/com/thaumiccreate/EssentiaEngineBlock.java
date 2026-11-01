@@ -21,8 +21,18 @@ public final class EssentiaEngineBlock extends HorizontalKineticBlock implements
         if(d==(s.getValue(UPPER)?Direction.DOWN:Direction.UP) && (!other.is(this)||other.getValue(UPPER)==s.getValue(UPPER))) return Blocks.AIR.defaultBlockState();
         return super.updateShape(s,d,other,l,p,q);
     }
+    // Leave the same clearance around the upper output as Create's speed controller.
+    @Override public net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state,
+            BlockGetter world, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
+        return state.getValue(UPPER) ? com.simibubi.create.AllShapes.SPEED_CONTROLLER
+                : super.getShape(state, world, pos, context);
+    }
+    @Override public net.minecraft.world.phys.shapes.VoxelShape getCollisionShape(BlockState state,
+            BlockGetter world, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
+        return getShape(state, world, pos, context);
+    }
     @Override public Direction.Axis getRotationAxis(BlockState s) { return s.getValue(HORIZONTAL_FACING).getClockWise().getAxis(); }
-    @Override public boolean hasShaftTowards(LevelReader l,BlockPos p,BlockState s,Direction d) { return s.getValue(UPPER)&&d.getAxis()==getRotationAxis(s); }
+    @Override public boolean hasShaftTowards(LevelReader l,BlockPos p,BlockState s,Direction d) { return false; }
     @Override public Class<EssentiaEngineBlockEntity> getBlockEntityClass() { return EssentiaEngineBlockEntity.class; }
     @Override public BlockEntityType<? extends EssentiaEngineBlockEntity> getBlockEntityType() { return DeviceRegistry.ENGINE_ENTITY.get(); }
 }
