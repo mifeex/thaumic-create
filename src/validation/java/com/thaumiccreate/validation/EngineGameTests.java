@@ -74,9 +74,19 @@ public class EngineGameTests {
   var cogAxis=large ? facing.getAxis() : engineAxis;
   var cogPos=p.above(2);
   var cog=(large ? com.simibubi.create.AllBlocks.LARGE_COGWHEEL : com.simibubi.create.AllBlocks.COGWHEEL).getDefaultState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS,cogAxis);
+  var player=net.neoforged.neoforge.common.util.FakePlayerFactory.getMinecraft(l);
+  var stack=(large?com.simibubi.create.AllBlocks.LARGE_COGWHEEL:com.simibubi.create.AllBlocks.COGWHEEL).asStack();
+  player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,stack);
+  var hit=new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(p.above()).add(0,.5,0),Direction.UP,p.above(),false);
+  var context=new net.minecraft.world.item.context.BlockPlaceContext(player,net.minecraft.world.InteractionHand.MAIN_HAND,stack,hit);
+  var automatic=((net.minecraft.world.item.BlockItem)stack.getItem()).getBlock().getStateForPlacement(context);
+  h.assertTrue(automatic!=null&&automatic.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS)==cogAxis,"Automatic placement chose disconnected axis");
+  var helper=net.createmod.catnip.placement.PlacementHelpers.get(EngineCogPlacement.ID);
+  var preview=helper.getOffset(player,l,upper,p.above(),hit,stack);
+  h.assertTrue(preview.isSuccessful()&&preview.getBlockPos().equals(cogPos)&&preview.getGhostState().getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS)==cogAxis,"Missing or incorrect cog placement preview");
+  h.assertTrue(net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(upper.getCollisionShape(l,p.above()),net.minecraft.world.phys.shapes.Shapes.block(),net.minecraft.world.phys.shapes.BooleanOp.NOT_SAME),"Collision still a full cube");
   h.assertTrue(cog.canSurvive(l,cogPos),"Cog placement rejected above engine");
   l.setBlockAndUpdate(cogPos,cog);
-  h.assertTrue(!net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(upper.getCollisionShape(l,p.above()),com.simibubi.create.AllShapes.SPEED_CONTROLLER,net.minecraft.world.phys.shapes.BooleanOp.NOT_SAME),"Wrong cog clearance");
   h.runAfterDelay(2,()->((EssentiaEngineBlockEntity)l.getBlockEntity(p)).addEssentia("potentia",16,Direction.DOWN));
   h.runAfterDelay(12,()->{
    var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
