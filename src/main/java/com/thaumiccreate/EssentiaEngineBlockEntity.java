@@ -14,9 +14,10 @@ import java.util.List;
 public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntity implements EssentiaTransport {
     public static final int FUEL_SUCTION = 128;
     public static final int FUEL_CAPACITY = 256;
+    public static final int PAYMENT_INTERVAL = 40;
     private int fuelQuarters;
     private int paidTicks;
-    // Tenths of an aspect quarter: integer ledger preserves partial intervals exactly.
+    // Fortieths of an aspect quarter: integer ledger preserves partial intervals exactly.
     // A final sub-tick credit may go slightly negative and is settled by the next payment.
     private int paidEnergy;
     private int paidRpm;
@@ -62,10 +63,10 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
             int payment = Math.min(fuelQuarters, costQuarters(requested));
             if (payment > 0) {
                 fuelQuarters -= payment;
-                paidEnergy += payment * 10;
+                paidEnergy += payment * PAYMENT_INTERVAL;
                 paidRpm = requested;
             }
-            paidTicks = paidEnergy > 0 ? 10 : 0;
+            paidTicks = paidEnergy > 0 ? PAYMENT_INTERVAL : 0;
             if (paidTicks == 0) paidRpm = 0;
             setChanged();
             sendData();
@@ -89,11 +90,11 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
             }
         }
     }
-    private int storedEnergy() { return fuelQuarters * 10 + Math.max(0, paidEnergy); }
-    private int freeEssentiaUnits() { return Math.max(0, (FUEL_CAPACITY * 40 - storedEnergy()) / 40); }
-    public double storedEssentia() { var b=base(); return b==null?0:b.storedEnergy()/40.0; }
+    private int storedEnergy() { return fuelQuarters * PAYMENT_INTERVAL + Math.max(0, paidEnergy); }
+    private int freeEssentiaUnits() { return Math.max(0, (FUEL_CAPACITY * 160 - storedEnergy()) / 160); }
+    public double storedEssentia() { var b=base(); return b==null?0:b.storedEnergy()/160.0; }
     public int storedQuarters(){var b=base();return b==null?0:b.fuelQuarters;}
-    @Override public boolean addToGoggleTooltip(List<Component> lines,boolean sneak){var b=base();if(b==null)return false;lines.add(Component.literal(b.rpm.getValue()+" RPM | "+costText(b.rpm.getValue())+" Potentia / 10t"));lines.add(Component.literal("Potentia: "+b.storedEssentia()+" / "+FUEL_CAPACITY));return true;}
+    @Override public boolean addToGoggleTooltip(List<Component> lines,boolean sneak){var b=base();if(b==null)return false;lines.add(Component.literal(b.rpm.getValue()+" RPM | "+costText(b.rpm.getValue())+" Potentia / 40t"));lines.add(Component.literal("Potentia: "+b.storedEssentia()+" / "+FUEL_CAPACITY));return true;}
     public boolean isConnectable(Direction side){return !upper()&&side!=Direction.UP;}
     public boolean canInputFrom(Direction side){return isConnectable(side);}
     public boolean canOutputTo(Direction side){return false;}
@@ -101,13 +102,14 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
     public String suctionType(Direction side){return isConnectable(side)?"potentia":null;}
     public int suctionAmount(Direction side){return isConnectable(side)&&freeEssentiaUnits()>0?FUEL_SUCTION:0;}
     public String essentiaType(Direction side){return isConnectable(side)&&storedEnergy()>0?"potentia":null;}
-    public int essentiaAmount(Direction side){return isConnectable(side)?storedEnergy()/40:0;}
+    public int essentiaAmount(Direction side){return isConnectable(side)?storedEnergy()/160:0;}
     public int minimumSuction(){return 0;}
     public int takeEssentia(String aspect,int amount,Direction side){return 0;}
     public int addEssentia(String aspect,int amount,Direction side){if(!canInputFrom(side)||!"potentia".equals(aspect)||amount<=0)return 0;int accepted=Math.min(amount,freeEssentiaUnits());fuelQuarters+=accepted*4;setChanged();if(level!=null&&!level.isClientSide)sendData();return accepted;}
-    @Override protected void read(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.read(tag,provider,packet);fuelQuarters=Math.max(0,Math.min(FUEL_CAPACITY*4,tag.getInt("FuelQuarters")));paidTicks=Math.max(0,Math.min(10,tag.getInt("PaidTicks")));paidRpm=Math.max(0,Math.min(128,tag.getInt("PaidRpm")));
-        paidEnergy = tag.contains("PaidEnergy") ? Math.max(-31, Math.min(320, tag.getInt("PaidEnergy"))) : paidTicks * costQuarters(paidRpm);
-        fuelQuarters = Math.min(fuelQuarters, (FUEL_CAPACITY * 40 - Math.max(0, paidEnergy)) / 10);
+    @Override protected void read(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.read(tag,provider,packet);fuelQuarters=Math.max(0,Math.min(FUEL_CAPACITY*4,tag.getInt("FuelQuarters")));paidTicks=Math.max(0,Math.min(PAYMENT_INTERVAL,tag.getInt("PaidTicks")));paidRpm=Math.max(0,Math.min(128,tag.getInt("PaidRpm")));
+        paidEnergy = tag.contains("PaidEnergy") ? Math.max(-124, Math.min(1280, tag.getInt("PaidEnergy") * (tag.getInt("PaymentInterval") == PAYMENT_INTERVAL ? 1 : 4))) : paidTicks * costQuarters(paidRpm) * 4;
+        if (tag.getInt("PaymentInterval") != PAYMENT_INTERVAL) paidTicks = Math.min(PAYMENT_INTERVAL, paidTicks * 4);
+        fuelQuarters = Math.min(fuelQuarters, (FUEL_CAPACITY * 160 - Math.max(0, paidEnergy)) / PAYMENT_INTERVAL);
     }
-    @Override public void write(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.write(tag,provider,packet);tag.putInt("FuelQuarters",fuelQuarters);tag.putInt("PaidTicks",paidTicks);tag.putInt("PaidRpm",paidRpm);tag.putInt("PaidEnergy",paidEnergy);}
+    @Override public void write(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider,boolean packet){super.write(tag,provider,packet);tag.putInt("FuelQuarters",fuelQuarters);tag.putInt("PaidTicks",paidTicks);tag.putInt("PaidRpm",paidRpm);tag.putInt("PaidEnergy",paidEnergy);tag.putInt("PaymentInterval",PAYMENT_INTERVAL);}
 }
