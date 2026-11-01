@@ -2,5 +2,6 @@
   "id": "create",
   "title": "category.thaumic_create",
   "icon": "create:cogwheel",
-  "order": 106
+  "order": 106,
+  "background": "thaumic_create:textures/gui/research_blueprint.png"
 }
