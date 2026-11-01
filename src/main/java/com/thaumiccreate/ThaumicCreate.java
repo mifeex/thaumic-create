@@ -14,5 +14,5 @@ public final class ThaumicCreate {
         ITEMS.register("plate_thaumium", () -> new Item(new Item.Properties()));
         ITEMS.register("plate_void", () -> new Item(new Item.Properties()));
     }
-    public ThaumicCreate() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); DeviceRegistry.register(FMLJavaModLoadingContext.get().getModEventBus()); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::placed); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::interact); }
+    public ThaumicCreate() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); DeviceRegistry.register(FMLJavaModLoadingContext.get().getModEventBus()); ModCreativeTabs.register(FMLJavaModLoadingContext.get().getModEventBus()); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::placed); net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(PressEvents::interact); }
 }
