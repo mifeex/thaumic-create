@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'net.minecraftforge.gradle' version '6.0.54'
 }
+def localAddonDependencies = file('.gradle/local-libs/forge-1.20.1').exists() ? '.gradle/local-libs/forge-1.20.1' : 'libs'
+
 version = '0.4.0'
 group = 'com.thaumiccreate'
 base { archivesName = 'thaumic-create-forge-1.20.1' }
@@ -15,14 +17,14 @@ jar { manifest { attributes('MixinConfigs': 'thaumic_create.mixins.json') } }
 
 
 
-dependencies { compileOnly fileTree(dir: 'libs', include: '*.jar') }
+dependencies { compileOnly fileTree(dir: localAddonDependencies, include: '*.jar') }
 
 if (providers.gradleProperty('verifyDevices').isPresent()) {
     sourceSets.main.java.srcDir 'src/validation/java'
     sourceSets.main.resources.srcDir 'src/validation/resources'
     dependencies {
         implementation fileTree(dir:'build/validation-mods', include:'*.jar')
-        runtimeOnly fileTree(dir:'libs', include:'*.jar')
+        runtimeOnly fileTree(dir:localAddonDependencies, include:'*.jar')
     }
     minecraft.runs {
         gameTestServer {
