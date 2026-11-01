@@ -1,0 +1,21 @@
+{
+  "id": "create_art_of_alchemy",
+  "category": "create",
+  "icon_resource": "thaumic_reborn:textures/misc/r_alchman.png",
+  "title": "tc.research_name.ALCHEMICALMANUFACTURE",
+  "subtitle": "tc.research_text.ALCHEMICALMANUFACTURE",
+  "concealed": false,
+  "auto_unlock": true,
+  "parents": [],
+  "hidden_parents": [
+    "alchemicalmanufacture"
+  ],
+  "x": -112,
+  "y": -80,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.art_of_alchemy.reference"
+    }
+  ]
+}
