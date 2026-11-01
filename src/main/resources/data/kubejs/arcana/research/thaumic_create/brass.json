@@ -5,7 +5,8 @@
   "title": "research.kubejs.thaumic_create.brass.title",
   "subtitle": "research.kubejs.thaumic_create.brass.subtitle",
   "parents": [
-    "create_integration"
+    "create_integration",
+    "create_art_of_alchemy"
   ],
   "hidden_parents": [
     "crucible"

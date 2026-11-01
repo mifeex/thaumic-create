@@ -4,7 +4,7 @@
   "icon": "minecraft:andesite",
   "title": "research.kubejs.thaumic_create.create_andesite.title",
   "parents": [
-    "create_integration"
+    "create_art_of_alchemy"
   ],
   "hidden_parents": [
     "crucible"

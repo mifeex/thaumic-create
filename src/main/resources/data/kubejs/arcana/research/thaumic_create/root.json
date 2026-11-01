@@ -4,9 +4,7 @@
   "icon": "create:cogwheel",
   "title": "research.kubejs.thaumic_create.root.title",
   "subtitle": "research.kubejs.thaumic_create.root.subtitle",
-  "parents": [
-    "first_steps"
-  ],
+  "parents": [],
   "auto_unlock": true,
   "x": 0,
   "y": -80,
