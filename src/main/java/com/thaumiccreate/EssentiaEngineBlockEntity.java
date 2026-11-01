@@ -12,6 +12,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntity implements EssentiaTransport {
+    public static final int FUEL_SUCTION = 128;
     private int fuelQuarters;
     private int paidTicks;
     private int paidRpm;
@@ -59,7 +60,7 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
         for(Direction side:Direction.values()){
             if(!isConnectable(side)||fuelQuarters>252)continue;
             var remote=ThaumicRebornApi.essentia().neighbour(level,worldPosition,side).orElse(null);Direction opposite=side.getOpposite();
-            if(remote!=null&&remote.canOutputTo(opposite)&&remote.suctionAmount(opposite)<32&&remote.minimumSuction()<=32&&"potentia".equals(remote.essentiaType(opposite))){
+            if(remote!=null&&remote.canOutputTo(opposite)&&remote.suctionAmount(opposite)<FUEL_SUCTION&&remote.minimumSuction()<=FUEL_SUCTION&&"potentia".equals(remote.essentiaType(opposite))){
                 int taken=remote.takeEssentia("potentia",1,opposite);if(taken>0)addEssentia("potentia",taken,side);
             }
         }
@@ -71,7 +72,7 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
     public boolean canOutputTo(Direction side){return false;}
     public void setSuction(String aspect,int value){}
     public String suctionType(Direction side){return isConnectable(side)?"potentia":null;}
-    public int suctionAmount(Direction side){return isConnectable(side)&&fuelQuarters<=252?32:0;}
+    public int suctionAmount(Direction side){return isConnectable(side)&&fuelQuarters<=252?FUEL_SUCTION:0;}
     public String essentiaType(Direction side){return isConnectable(side)&&fuelQuarters>0?"potentia":null;}
     public int essentiaAmount(Direction side){return isConnectable(side)?fuelQuarters/4:0;}
     public int minimumSuction(){return 0;}

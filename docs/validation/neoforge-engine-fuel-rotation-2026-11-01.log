@@ -1,0 +1,164 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.8/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Creating Minecraft artifacts without recompilation.
+
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava
+> Task :processResources
+> Task :classes
+
+> Task :downloadAssets
+Loaded 137 artifacts from /private/tmp/thaumic-create-engine-fix/neoforge/build/tmp/downloadAssets/nfrt_artifact_manifest.properties
+Downloading asset index 17
+Using Minecraft asset root: /Users/evgenii/.gradle/caches/neoformruntime/assets
+  ↓ https://piston-meta.mojang.com/v1/packages/00551f206ccb65cb965fd0aebc14d22cda282db7/17.json
+
+> Task :writePressGameTestLegacyClasspath
+> Task :preparePressGameTestRun
+
+> Task :runPressGameTest
+WARN StatusConsoleListener Advanced terminal features are not available in this environment
+[18:43:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserverdev, --gameDir, ., --fml.fmlVersion, 4.0.45, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.259, --fml.neoFormVersion, 20240808.144430]
+[18:43:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: JVM identified as Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 21.0.12.1+1-LTS-4
+[18:43:19] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.12.1 by Oracle Corporation; OS Mac OS X arch aarch64 version 26.6.2
+[18:43:19] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserverdev
+[18:43:19] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/Users/evgenii/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/26d01f0567ab46e9ca0d2ed89d0ecc11aadbd433/sponge-mixin-0.16.4+mixin.0.8.7.jar%2394!/ Service=ModLauncher Env=SERVER
+[18:43:19] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: thaumic_reborn_api. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-runtime/neoforge-1.21.1/thaumic-reborn-api-neoforge-2.0.9-neoforge.jar
+[18:43:19] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:Registrate.MC1._21._67. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/neoforge-1.21.1/Registrate-MC1.21-1.3.0+67.jar
+[18:43:19] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: flywheel. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/neoforge-1.21.1/flywheel-neoforge-1.21.1-1.0.6.jar
+[18:43:19] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: /Volumes/внешний/Проекты/thaumic-create/.gradle/local-libs/neoforge-1.21.1/ponder-neoforge-1.0.82+mc1.21.1.jar
+[18:43:19] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[18:43:19] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Create 6.0.10 (create)
+		Curios API 9.5.1+1.21.1 (curios)
+		Flywheel 1.0.6 (flywheel)
+		Minecraft 1.21.1 (minecraft)
+		NeoForge 21.1.259 (neoforge)
+		Ponder 1.0.82+mc1.21.1 (ponder)
+		Thaumic Create 0.4.0 (thaumic_create)
+		Thaumic Reborn 1.3.0 (thaumic_reborn)
+		Thaumic Reborn API 2.0.9-neoforge (thaumic_reborn_api)
+[18:43:20] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[18:43:20] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserverdev' with arguments [--gameDir, .]
+[18:43:20] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[18:43:20] [main/WARN] [mixin/]: Reference map 'curios.refmap.json' for curios.mixins.json could not be read. If this is a development environment you can ignore this message
+[18:43:20] [main/WARN] [mixin/]: Reference map 'ponder.refmap.json' for ponder-common.mixins.json could not be read. If this is a development environment you can ignore this message
+[18:43:21] [main/WARN] [mixin/]: Error loading class: tallestegg/guardvillagers/common/entities/Guard (java.lang.ClassNotFoundException: tallestegg.guardvillagers.common.entities.Guard)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: com/terraformersmc/biolith/impl/biome/DimensionBiomePlacement (java.lang.ClassNotFoundException: com.terraformersmc.biolith.impl.biome.DimensionBiomePlacement)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/worldgen/lithostitched/worldgen/structure/AlternateJigsawGenerator$StructurePoolGenerator (java.lang.ClassNotFoundException: dev.worldgen.lithostitched.worldgen.structure.AlternateJigsawGenerator$StructurePoolGenerator)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/simulated_team/simulated/index/SimBlockMovementChecks (java.lang.ClassNotFoundException: dev.simulated_team.simulated.index.SimBlockMovementChecks)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/ryanhcode/sable/api/SubLevelAssemblyHelper (java.lang.ClassNotFoundException: dev.ryanhcode.sable.api.SubLevelAssemblyHelper)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/ryanhcode/sable/sublevel/plot/heat/SubLevelHeatMapManager (java.lang.ClassNotFoundException: dev.ryanhcode.sable.sublevel.plot.heat.SubLevelHeatMapManager)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/ryanhcode/sable/sublevel/entity_collision/SubLevelEntityCollision (java.lang.ClassNotFoundException: dev.ryanhcode.sable.sublevel.entity_collision.SubLevelEntityCollision)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: dev/ryanhcode/sable/mixinhelpers/CanFallAtleastHelper (java.lang.ClassNotFoundException: dev.ryanhcode.sable.mixinhelpers.CanFallAtleastHelper)
+[18:43:21] [main/WARN] [mixin/]: Error loading class: org/jetbrains/annotations/ApiStatus$ScheduledForRemoval (java.lang.ClassNotFoundException: org.jetbrains.annotations.ApiStatus$ScheduledForRemoval)
+[18:43:21] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[18:43:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[18:43:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[18:43:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[18:43:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[18:43:32] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[18:43:33] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.259, for MC 1.21.1
+[18:43:33] [modloading-worker-0/INFO] [co.si.cr.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
+[18:43:37] [NeoForge Version Check/INFO] [ne.ne.fm.VersionChecker/]: [create] Starting version check at https://api.modrinth.com/updates/create/forge_updates.json?neoforge=only
+[18:43:37] [main/ERROR] [minecraft/Settings]: Failed to load properties from file: server.properties
+java.nio.file.NoSuchFileException: server.properties
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92) ~[?:?] {}
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106) ~[?:?] {}
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111) ~[?:?] {}
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261) ~[?:?] {}
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:379) ~[?:?] {}
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:431) ~[?:?] {}
+	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420) ~[?:?] {}
+	at java.base/java.nio.file.Files.newInputStream(Files.java:159) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.Settings.loadFromFile(Settings.java:38) ~[neoforge-21.1.259.jar%23125!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServerProperties.fromFile(DedicatedServerProperties.java:132) ~[neoforge-21.1.259.jar%23125!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServerSettings.<init>(DedicatedServerSettings.java:12) ~[neoforge-21.1.259.jar%23125!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.Main.main(Main.java:125) ~[neoforge-21.1.259.jar%23125!/:?] {re:classloading}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.45/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.45.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.45/net.neoforged.fml.loading.targets.CommonLaunchHandler.serverService(CommonLaunchHandler.java:128) ~[loader-4.0.45.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.45/net.neoforged.fml.loading.targets.NeoForgeServerDevLaunchHandler.runService(NeoForgeServerDevLaunchHandler.java:23) ~[loader-4.0.45.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.45/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.45.jar%23102!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%2382!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+[18:43:37] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[18:43:37] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/private/tmp/thaumic-create-engine-fix/neoforge/build/moddev/artifacts/neoforge-21.1.259.jar%23125!/assets/.mcassetsroot' uses unexpected schema
+[18:43:37] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/private/tmp/thaumic-create-engine-fix/neoforge/build/moddev/artifacts/neoforge-21.1.259.jar%23125!/data/.mcassetsroot' uses unexpected schema
+[18:43:37] [main/INFO] [co.si.cr.Create/]: Created 169 recipes which will be injected into the game
+[18:43:37] [main/INFO] [co.si.cr.Create/]: Created 0 tags which will be injected into the game
+[18:43:37] [main/INFO] [ne.ne.ne.ga.GameTestHooks/]: Enabled Gametest Namespaces: [thaumic_create_tests]
+[18:43:38] [NeoForge Version Check/INFO] [ne.ne.fm.VersionChecker/]: [create] Found status: OUTDATED Current: 6.0.10 Target: 6.0.10+mc1.21.1
+[18:43:40] [main/INFO] [minecraft/RecipeManager]: Loaded 3241 recipes
+[18:43:41] [main/INFO] [minecraft/AdvancementTree]: Loaded 2517 advancements
+[18:43:41] [main/INFO] [Curios API/]: Loaded 10 curio slots
+[18:43:41] [main/INFO] [Curios API/]: Loaded 1 curio entities
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 48 aspect definitions; skipped 0 inactive definitions
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 6 classic construction definitions
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 89 infusion recipes
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 1 essentia transport definitions
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 59 active Crucible recipes
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 1075 explicit scan definitions; skipped 23 inactive definitions; automatic fallback is disabled (saved inferred scan keys remain readable)
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 7 research category definitions; skipped 0 inactive definitions
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 216 research definitions; 0 have inactive gameplay content
+[18:43:41] [main/INFO] [co.th.ThaumicReborn/]: Loaded 19 wand rods and 6 wand caps
+[18:43:42] [Server thread/INFO] [co.th.ThaumicReborn/]: Resolved CLASSIC Overworld biome holders from the server registry
+[18:43:43] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[18:43:43] [worldgen/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[18:43:43] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 466 ms
+[18:43:43] [Server thread/INFO] [minecraft/GameTestServer]: Started game test server
+[18:43:43] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[18:43:43] [Server thread/WARN] [ne.ne.ne.co.TagConventionLogWarning/]: 
+   Dev warning - Legacy Tags detected. Please migrate your 'forge' namespace tags to the 'c' namespace! See net.neoforged.neoforge.common.Tags.java for all tags.
+   NOTE: Many tags have been moved around or renamed. Some new ones were added so please review the new tags.
+    And make sure you follow tag conventions for new tags! The convention is `c` with nouns generally being plural and adjectives being singular.
+   You can disable this message in NeoForge's common config by setting `logLegacyTagWarnings` to "SILENCED" or see individual tags with "DEV_VERBOSE".
+
+[18:43:43] [Server thread/INFO] [minecraft/GameTestServer]: 10 tests are now running at position 779859, -59, 10851317!
+[18:43:44] [Server thread/INFO] [minecraft/GameTestRunner]: Running test batch 'defaultBatch:0' (10 tests)...
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [          ]
+[18:43:44] [Server thread/INFO] [co.th.ThaumicReborn/]: [TCM-RESEARCH #1][SERVER_RESEARCH_PURCHASE_REJECTED] player=PressOwner result=UNAVAILABLE
+[18:43:44] [Server thread/INFO] [co.th.ThaumicReborn/]: [TCM-RESEARCH #2][SERVER_RESEARCH_PURCHASED] player=PressOwner research=create_plate_thaumium cost=[ComponentCost[aspectId=metallum, amount=4], ComponentCost[aspectId=praecantatio, amount=2]]
+[18:43:44] [Server thread/INFO] [co.th.ThaumicReborn/]: [TCM-RESEARCH #3][SERVER_RESEARCH_PURCHASE_REJECTED] player=PressOwner result=UNAVAILABLE
+[18:43:44] [Server thread/INFO] [co.th.ThaumicReborn/]: [TCM-RESEARCH #4][SERVER_RESEARCH_PURCHASED] player=PressOwner research=create_plate_void cost=[ComponentCost[aspectId=metallum, amount=4], ComponentCost[aspectId=praecantatio, amount=2], ComponentCost[aspectId=vacuos, amount=2]]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [_+_+__    ]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [+++++____+]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_+_+]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_+_+]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_+_+]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_+_+]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++_+++]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: [++++++++++]
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: ========= 10 GAME TESTS COMPLETE IN 1.055 s ======================
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: All 10 required tests passed :)
+[18:43:44] [Server thread/INFO] [minecraft/GameTestServer]: ====================================================
+[18:43:44] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[18:43:44] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[18:43:44] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[18:43:46] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:overworld
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:the_nether
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[Test Level]'/minecraft:the_end
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[18:43:47] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[18:43:47] [Server thread/INFO] [minecraft/GameTestServer]: Game test server shutting down
+
+BUILD SUCCESSFUL in 39s
+7 actionable tasks: 6 executed, 1 up-to-date

@@ -28,4 +28,24 @@ public class EngineGameTests {
    h.assertTrue(base.rpm.getValue()==128,"Speed lost on save");h.succeed();
   });
  }
+ @GameTest(template="empty",timeoutTicks=160)
+ public static void enginePullsFromFilteredJarThroughTubes(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));
+  var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  var jarPos=p.west(2).below();
+  l.setBlockAndUpdate(jarPos,com.thaumicreborn.registry.ModBlocks.WARDED_JAR.get().defaultBlockState());
+  var jar=l.getBlockEntity(jarPos);
+  var payload=new net.minecraft.nbt.CompoundTag();payload.putString("Aspect","potentia");payload.putString("AspectFilter","potentia");payload.putInt("Amount",64);
+  jar.loadWithComponents(payload, l.registryAccess());
+  var tube=com.thaumicreborn.registry.ModBlocks.ESSENTIA_TUBE.get().defaultBlockState();
+  l.setBlockAndUpdate(jarPos.above(),tube);l.setBlockAndUpdate(p.west(),tube);
+  h.runAfterDelay(120,()->{
+   var fuel=(com.thaumicreborn.api.essentia.EssentiaTransport)jar;
+   h.assertTrue(fuel.essentiaAmount(Direction.UP)<64,"Filtered jar never drained through tubes");
+   var top=(EssentiaEngineBlockEntity)l.getBlockEntity(p.above());
+   h.assertTrue(top.getGeneratedSpeed()==8&&top.getSpeed()==8,"Engine did not start kinetic rotation");
+   h.succeed();
+  });
+ }
 }

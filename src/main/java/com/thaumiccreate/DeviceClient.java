@@ -18,11 +18,13 @@ public final class DeviceClient {
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void renderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(DeviceRegistry.ENGINE_ENTITY.get(), EssentiaEngineRenderer::new);
         event.registerBlockEntityRenderer(DeviceRegistry.TANK_ENTITY.get(), com.simibubi.create.content.fluids.tank.FluidTankRenderer::new);
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void setup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         TankConnectedTextures.register();
+        EssentiaEngineRenderer.init();
         event.enqueueWork(() -> {
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ENGINE.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.TANK.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
