@@ -13,5 +13,5 @@ public final class ThaumicCreate {
         ITEMS.registerSimpleItem("plate_thaumium", new Item.Properties());
         ITEMS.registerSimpleItem("plate_void", new Item.Properties());
     }
-    public ThaumicCreate(IEventBus bus) { ITEMS.register(bus); DeviceRegistry.register(bus); net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(PressEvents::placed); net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(PressEvents::interact); }
+    public ThaumicCreate(IEventBus bus) { ITEMS.register(bus); DeviceRegistry.register(bus); ModCreativeTabs.register(bus); net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(PressEvents::placed); net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(PressEvents::interact); }
 }
