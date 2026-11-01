@@ -38,3 +38,19 @@ if (providers.gradleProperty('verifyDevices').isPresent()) {
     }
 }
 jar { exclude 'com/thaumiccreate/validation/**', 'data/thaumic_create_tests/**' }
+
+// Runtime mods are separate from compile-only API libraries.
+def localAddonRuntime = file('.gradle/local-runtime/forge-1.20.1').exists() ? '.gradle/local-runtime/forge-1.20.1' : 'runtime-mods'
+dependencies {
+    runtimeOnly fileTree(dir: localAddonDependencies, include: '*.jar')
+    runtimeOnly fileTree(dir: localAddonRuntime, include: '*.jar')
+}
+minecraft.runs {
+    client {
+        workingDirectory file('run')
+        property 'mixin.env.remapRefMap', 'true'
+        property 'mixin.env.refMapRemappingFile', file('build/createSrgToMcp/output.srg').absolutePath
+        args '-mixin.config=thaumic_create.mixins.json'
+        mods { thaumic_create { source sourceSets.main } }
+    }
+}
