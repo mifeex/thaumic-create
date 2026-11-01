@@ -14,7 +14,7 @@
         "facing": "north"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/connection/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_connection",
         "y": 0
       }
     },
@@ -23,7 +23,7 @@
         "facing": "north"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/rim/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_rim",
         "y": 0
       }
     },
@@ -32,7 +32,7 @@
         "facing": "north"
       },
       "apply": {
-        "model": "thaumic_reborn:block/essentia_tube_arm",
+        "model": "thaumic_create:block/essentia_adapter_tube_arm",
         "y": 180
       }
     },
@@ -50,7 +50,7 @@
         "facing": "east"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/connection/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_connection",
         "y": 90
       }
     },
@@ -59,7 +59,7 @@
         "facing": "east"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/rim/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_rim",
         "y": 90
       }
     },
@@ -68,7 +68,7 @@
         "facing": "east"
       },
       "apply": {
-        "model": "thaumic_reborn:block/essentia_tube_arm",
+        "model": "thaumic_create:block/essentia_adapter_tube_arm",
         "y": 270
       }
     },
@@ -86,7 +86,7 @@
         "facing": "south"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/connection/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_connection",
         "y": 180
       }
     },
@@ -95,7 +95,7 @@
         "facing": "south"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/rim/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_rim",
         "y": 180
       }
     },
@@ -104,7 +104,7 @@
         "facing": "south"
       },
       "apply": {
-        "model": "thaumic_reborn:block/essentia_tube_arm",
+        "model": "thaumic_create:block/essentia_adapter_tube_arm",
         "y": 0
       }
     },
@@ -122,7 +122,7 @@
         "facing": "west"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/connection/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_connection",
         "y": 270
       }
     },
@@ -131,7 +131,7 @@
         "facing": "west"
       },
       "apply": {
-        "model": "create:block/fluid_pipe/rim/north",
+        "model": "thaumic_create:block/essentia_adapter_pipe_rim",
         "y": 270
       }
     },
@@ -140,7 +140,7 @@
         "facing": "west"
       },
       "apply": {
-        "model": "thaumic_reborn:block/essentia_tube_arm",
+        "model": "thaumic_create:block/essentia_adapter_tube_arm",
         "y": 90
       }
     }

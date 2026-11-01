@@ -1,0 +1,147 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "tube": "thaumic_reborn:block/tube_2",
+    "particle": "thaumic_reborn:block/tube"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        1.9
+      ],
+      "to": [
+        10,
+        10,
+        5.9
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            11,
+            5,
+            13,
+            7
+          ],
+          "rotation": 270,
+          "texture": "#tube"
+        },
+        "south": {
+          "uv": [
+            8,
+            6,
+            10,
+            8
+          ],
+          "texture": "#tube"
+        },
+        "west": {
+          "uv": [
+            11,
+            5,
+            13,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#tube"
+        },
+        "up": {
+          "uv": [
+            11,
+            5,
+            13,
+            7
+          ],
+          "rotation": 180,
+          "texture": "#tube"
+        },
+        "down": {
+          "uv": [
+            11,
+            5,
+            13,
+            7
+          ],
+          "texture": "#tube"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        5,
+        -0.1
+      ],
+      "to": [
+        11,
+        11,
+        1.9
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            10.5,
+            8,
+            13.5,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#tube"
+        },
+        "south": {
+          "uv": [
+            10.5,
+            8,
+            13.5,
+            11
+          ],
+          "texture": "#tube"
+        },
+        "west": {
+          "uv": [
+            10.5,
+            7,
+            13.5,
+            8
+          ],
+          "rotation": 90,
+          "texture": "#tube"
+        },
+        "up": {
+          "uv": [
+            10.5,
+            8,
+            13.5,
+            7
+          ],
+          "texture": "#tube"
+        },
+        "down": {
+          "uv": [
+            10.5,
+            7,
+            13.5,
+            8
+          ],
+          "texture": "#tube"
+        },
+        "north": {
+          "uv": [
+            10.5,
+            8,
+            13.5,
+            11
+          ],
+          "texture": "#tube",
+          "cullface": "north"
+        }
+      }
+    }
+  ]
+}
