@@ -16,7 +16,8 @@ public final class EssentiaEngineRenderer extends KineticBlockEntityRenderer<Ess
             PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
         if (!engine.upper()) return;
         // This addon has no Flywheel visual: render even when instancing is enabled.
-        renderRotatingBuffer(engine, CachedBuffers.partialFacing(ROTOR, engine.getBlockState()),
+        renderRotatingBuffer(engine, CachedBuffers.partialFacing(ROTOR, engine.getBlockState(),
+                        engine.getBlockState().getValue(EssentiaEngineBlock.HORIZONTAL_FACING)),
                 pose, buffers.getBuffer(RenderType.cutoutMipped()), light);
     }
 }
