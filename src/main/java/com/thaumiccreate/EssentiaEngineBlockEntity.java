@@ -28,8 +28,12 @@ public final class EssentiaEngineBlockEntity extends GeneratingKineticBlockEntit
     @Override public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         rpm=new ScrollValueBehaviour(Component.translatable("engine.thaumic_create.speed"),this,new ValueBoxTransform.Sided(){
+            { scale = .25f; }
             protected Vec3 getSouthLocation(){return new Vec3(.5,.5,1.01);}
-            protected boolean isSideActive(BlockState state,Direction side){return side==state.getValue(EssentiaEngineBlock.HORIZONTAL_FACING);}
+            protected boolean isSideActive(BlockState state,Direction side){
+                return state.getValue(EssentiaEngineBlock.UPPER)
+                        && side.getAxis()==state.getValue(EssentiaEngineBlock.HORIZONTAL_FACING).getClockWise().getAxis();
+            }
         }) {
             @Override public ValueSettingsBoard createBoard(net.minecraft.world.entity.player.Player player,net.minecraft.world.phys.BlockHitResult hit) {
                 return new ValueSettingsBoard(label,128,8,List.of(Component.literal("RPM")),new EngineSpeedFormatter());
