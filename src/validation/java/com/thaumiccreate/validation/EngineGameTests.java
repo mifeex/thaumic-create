@@ -5,6 +5,38 @@ import net.minecraft.gametest.framework.*;
 import net.neoforged.neoforge.gametest.*;
 @GameTestHolder("thaumic_create_tests") @PrefixGameTestTemplate(false)
 public class EngineGameTests {
+ @GameTest(template="empty",timeoutTicks=100)
+ public static void infusionResearchRequiredForAddonInfusionEntries(GameTestHelper h) {
+  var ids=new String[]{"create_essentia_engine","create_engine_arbor","create_engine_praecantatio"};
+  for (String id:ids) {
+   var player=net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"InfusionGate"));
+   var knowledge=com.thaumicreborn.knowledge.KnowledgeAccess.get(player).orElseThrow();
+   var entry=com.thaumicreborn.research.ResearchRegistry.find(id).orElseThrow();
+   h.assertTrue(entry.hiddenParents().contains("infusion"),id+" has no explicit infusion prerequisite");
+   for(String parent:entry.parents()) knowledge.completeResearch(parent);
+   for(String parent:entry.hiddenParents()) if(!parent.equals("infusion")) knowledge.completeResearch(parent);
+   knowledge.revealResearch(id);
+   h.assertTrue(!com.thaumicreborn.research.ResearchProgressService.isAvailable(entry,knowledge),id+" available without infusion");
+   knowledge.completeResearch("infusion");
+   h.assertTrue(com.thaumicreborn.research.ResearchProgressService.isAvailable(entry,knowledge),id+" still unavailable after infusion");
+  }
+  h.succeed();
+ }
+ @GameTest(template="empty",timeoutTicks=100)
+ public static void engineSidePortsHaveCollisionOnAllFacings(GameTestHelper h) {
+  var p=h.absolutePos(new BlockPos(1,2,1)); var level=h.getLevel();
+  for (Direction facing : new Direction[]{Direction.NORTH,Direction.EAST,Direction.SOUTH,Direction.WEST}) {
+   var state=DeviceRegistry.ENGINE.get().defaultBlockState().setValue(EssentiaEngineBlock.HORIZONTAL_FACING,facing);
+   level.setBlockAndUpdate(p,state);
+   var shape=state.getShape(level,p);
+   int turns=(facing.get2DDataValue()+2)%4;
+   double x=.0625,z=.5;
+   for(int n=0;n<turns;n++){double old=x;x=1-z;z=old;}
+   var probe=net.minecraft.world.phys.shapes.Shapes.box(x-.01,.32,z-.01,x+.01,.34,z+.01);
+   h.assertTrue(net.minecraft.world.phys.shapes.Shapes.joinIsNotEmpty(shape,probe,net.minecraft.world.phys.shapes.BooleanOp.AND),"Missing new port on "+facing);
+  }
+  h.succeed();
+ }
  @GameTest(template="empty",timeoutTicks=200)
  public static void engineConsumesExactFractionsAndDrivesShaft(GameTestHelper h){
   h.assertTrue(com.thaumicreborn.research.ResearchRegistry.find("create_essentia_engine").isPresent(),"Engine research missing");
@@ -203,6 +235,31 @@ public class EngineGameTests {
    var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);
    h.assertTrue(engine.storedEssentia()<=256,"Paid interval exceeds total cap");
    h.assertTrue(engine.addEssentia("potentia",8,Direction.DOWN)==0,"Prepaid fuel not counted towards reserve");
+   h.succeed();
+  });
+ }
+ @GameTest(template="empty",timeoutTicks=80)
+ public static void infusionFuelUpgradesStackAndPreserveReserves(GameTestHelper h){
+  var l=h.getLevel();var p=h.absolutePos(new BlockPos(2,2,2));var state=DeviceRegistry.ENGINE.get().defaultBlockState();
+  l.setBlockAndUpdate(p,state);l.setBlockAndUpdate(p.above(),state.setValue(EssentiaEngineBlock.UPPER,true));
+  h.runAfterDelay(2,()->{
+   var original=new net.minecraft.world.item.ItemStack(DeviceRegistry.ENGINE_ITEM.get());
+   original.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME,net.minecraft.network.chat.Component.literal("Upgraded generator"));
+   h.assertTrue(com.thaumicreborn.research.ResearchRegistry.find("create_engine_arbor").isPresent()&&com.thaumicreborn.research.ResearchRegistry.find("create_engine_praecantatio").isPresent(),"Upgrade book nodes missing");
+   var wood=com.thaumicreborn.infusion.InfusionRecipeRegistry.find(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("thaumic_create","engine_arbor")).orElseThrow();
+   var magic=com.thaumicreborn.infusion.InfusionRecipeRegistry.find(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("thaumic_create","engine_praecantatio")).orElseThrow();
+   h.assertTrue(wood.instability()==2&&magic.instability()==2,"Upgrade instability is not low");
+   var woodItem=wood.createResult(original,l.registryAccess());var both=magic.createResult(woodItem,l.registryAccess());
+   var reverse=wood.createResult(magic.createResult(original,l.registryAccess()),l.registryAccess());
+   h.assertTrue(EngineItemData.fuels(EngineItemData.read(both)).size()==3&&EngineItemData.fuels(EngineItemData.read(reverse)).size()==3,"Upgrade erased previous fuel support");
+   h.assertTrue(both.getHoverName().getString().equals("Upgraded generator"),"Infusion lost item name");
+   var engine=(EssentiaEngineBlockEntity)l.getBlockEntity(p);engine.restoreEngineItem(EngineItemData.read(both));
+   h.assertTrue(engine.addEssentia("potentia",8,Direction.DOWN)==8,"Default fuel missing");
+   engine.cycleFuel();h.assertTrue(engine.activeFuel().equals("arbor"),"Arbor selection failed");
+   h.assertTrue(engine.addEssentia("potentia",1,Direction.DOWN)==0&&engine.addEssentia("arbor",6,Direction.DOWN)==6,"Wrong fuel accepted");
+   engine.cycleFuel();h.assertTrue(engine.activeFuel().equals("praecantatio")&&engine.addEssentia("praecantatio",4,Direction.DOWN)==4,"Magic fuel missing");
+   engine.cycleFuel();h.assertTrue(engine.storedAspects().size()==3&&engine.storedEssentia()==8,"Switch lost fuel");
+   var saved=engine.engineItemData();engine.restoreEngineItem(saved);h.assertTrue(engine.storedAspects().get("arbor")==6&&engine.storedAspects().get("praecantatio")==4,"Item roundtrip lost reserves");
    h.succeed();
   });
  }

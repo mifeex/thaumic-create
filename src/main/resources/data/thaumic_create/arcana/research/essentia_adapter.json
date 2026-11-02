@@ -10,6 +10,9 @@
   "parents": [
     "create_plate_thaumium"
   ],
+  "hidden_parents": [
+    "infusion"
+  ],
   "reveal_when": {
     "type": "research_completed",
     "id": "create_plate_thaumium"
@@ -22,6 +25,18 @@
     },
     {
       "id": "praecantatio",
+      "amount": 1
+    },
+    {
+      "id": "aqua",
+      "amount": 1
+    },
+    {
+      "id": "machina",
+      "amount": 1
+    },
+    {
+      "id": "motus",
       "amount": 1
     }
   ],
@@ -36,8 +51,51 @@
       "body": "research.thaumic_create.essentia_adapter.body"
     },
     {
-      "type": "recipe",
-      "recipe": "thaumic_create:essentia_adapter"
+        "type": "infusion",
+      "recipe": "thaumic_create:essentia_adapter",
+      "output": "thaumic_create:essentia_adapter",
+      "central": "create:fluid_tank",
+      "components": [
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "thaumic_reborn:salis_mundus"
+        },
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "thaumic_reborn:quicksilver"
+        },
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "thaumic_reborn:salis_mundus"
+        },
+        {
+          "item": "thaumic_create:plate_thaumium"
+        },
+        {
+          "item": "create:andesite_alloy"
+        }
+      ],
+      "instability": "MINOR",
+      "aspect_costs": [
+        {
+          "id": "aqua",
+          "amount": 12
+        },
+        {
+          "id": "ordo",
+          "amount": 12
+        },
+        {
+          "id": "permutatio",
+          "amount": 8
+        }
+      ]
     }
   ]
 }

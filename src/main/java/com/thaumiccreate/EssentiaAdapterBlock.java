@@ -32,24 +32,6 @@ public final class EssentiaAdapterBlock extends BaseEntityBlock {
     @Override public RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }
     @Override public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new EssentiaAdapterBlockEntity(pos, state); }
     @Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, DeviceRegistry.ADAPTER_ENTITY.get(), EssentiaAdapterBlockEntity::tick);
-    }
-    @Override protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        toggle(state, level, pos, player); return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
-    }
-    @Override protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        toggle(state, level, pos, player); return InteractionResult.sidedSuccess(level.isClientSide);
-    }
-    private void toggle(BlockState state, Level level, BlockPos pos, Player player) {
-        if (level.isClientSide) return;
-        if (player.isShiftKeyDown()) {
-            state = state.cycle(IMPORTING); level.setBlockAndUpdate(pos, state);
-            level.invalidateCapabilities(pos);
-        }
-        var be = (EssentiaAdapterBlockEntity) level.getBlockEntity(pos);
-        String aspect = EssentiaFluid.aspect(be.buffer.getFluid());
-        player.displayClientMessage(net.minecraft.network.chat.Component.translatable(
-            state.getValue(IMPORTING) ? "message.thaumic_create.import" : "message.thaumic_create.export",
-            aspect == null ? "—" : aspect, be.buffer.getFluidAmount() / EssentiaFluid.UNIT), true);
+        return createTickerHelper(type, DeviceRegistry.ADAPTER_ENTITY.get(), (world, pos, blockState, be) -> be.tick());
     }
 }

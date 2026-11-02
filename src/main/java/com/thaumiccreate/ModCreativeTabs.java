@@ -16,6 +16,7 @@ public final class ModCreativeTabs {
                 .icon(() -> DeviceRegistry.ENGINE_ITEM.get().getDefaultInstance())
                 .displayItems((parameters, output) -> BuiltInRegistries.ITEM.stream()
                         .filter(item -> BuiltInRegistries.ITEM.getKey(item).getNamespace().equals(ThaumicCreate.ID))
+                        .filter(item -> item != DeviceRegistry.ARBOR_ICON.get() && item != DeviceRegistry.MAGIC_ICON.get())
                         .forEach(output::accept))
                 .build());
     }

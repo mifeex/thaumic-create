@@ -1,11 +1,12 @@
 modLoader="javafml"
 loaderVersion="[4,)"
-license="All Rights Reserved"
+license="${mod_license}"
 [[mods]]
-modId="thaumic_create"
-version="0.4.0"
-displayName="Thaumic Create"
-description="Create integration for Thaumic Reborn"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description="${mod_description}"
 
 [[dependencies.thaumic_create]]
 modId="neoforge"

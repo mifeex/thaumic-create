@@ -7,6 +7,8 @@ import net.minecraft.network.chat.MutableComponent;
 
 /** Identifies the engine board and keeps its slider label short. */
 public final class EngineSpeedFormatter extends ValueSettingsFormatter {
+    private java.util.function.Supplier<String> fuel = () -> "potentia";
+    public EngineSpeedFormatter(java.util.function.Supplier<String> fuel) { this(); this.fuel=fuel; }
     public EngineSpeedFormatter() {
         super(settings -> Component.literal(speed(settings) + " RPM"));
     }
@@ -17,6 +19,6 @@ public final class EngineSpeedFormatter extends ValueSettingsFormatter {
 
     public MutableComponent consumption(ValueSettings preview) {
         return Component.translatable("engine.thaumic_create.fuel_rate",
-                EssentiaEngineBlockEntity.costText(speed(preview)));
+                EssentiaEngineBlockEntity.costText(speed(preview)), Component.translatable("tc.aspect."+fuel.get()));
     }
 }

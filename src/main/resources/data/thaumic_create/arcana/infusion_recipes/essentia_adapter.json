@@ -1,0 +1,42 @@
+{
+  "research": "create_essentia_adapter",
+  "instability": 2,
+  "central": {
+    "item": "create:fluid_tank"
+  },
+  "components": [
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    },
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "thaumic_reborn:quicksilver"
+    },
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    },
+    {
+      "item": "thaumic_create:plate_thaumium"
+    },
+    {
+      "item": "create:andesite_alloy"
+    }
+  ],
+  "result": {
+    "item": "thaumic_create:essentia_adapter",
+    "count": 1
+  },
+  "essentia": {
+    "aqua": 12,
+    "ordo": 12,
+    "permutatio": 8
+  }
+}

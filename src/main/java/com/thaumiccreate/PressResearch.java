@@ -29,6 +29,18 @@ public final class PressResearch {
             be.setChanged();
         }
     }
+    /** Track who actually supplies a relevant ingot, including on presses placed before the addon. */
+    public static void bindInput(BlockEntity be, Player player) {
+        if (!isPress(be) || be.getLevel() == null || be.getLevel().isClientSide) return;
+        be.getPersistentData().putUUID(OWNER, player.getUUID());
+        bind(be, player);
+    }
+    public static boolean isPlateIngot(net.minecraft.world.item.ItemStack stack) {
+        if (stack.isEmpty()) return false;
+        var id = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
+        return id != null && id.getNamespace().equals("thaumic_reborn")
+            && (id.getPath().equals("thaumium_ingot") || id.getPath().equals("void_metal_ingot"));
+    }
     public static boolean allowed(BlockEntity be, ResourceLocation recipe) {
         if (!recipe.getNamespace().equals("thaumic_create")) return true;
         String research = switch (recipe.getPath()) {

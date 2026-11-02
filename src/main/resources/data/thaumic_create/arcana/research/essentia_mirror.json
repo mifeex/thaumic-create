@@ -1,0 +1,71 @@
+{
+  "id": "create_essentia_mirror",
+  "category": "create",
+  "title": "tc.research_name.MIRRORESSENTIA",
+  "subtitle": "tc.research_text.MIRRORESSENTIA",
+  "concealed": true,
+  "auto_unlock": true,
+  "parents": [],
+  "hidden_parents": [
+    "mirroressentia"
+  ],
+  "x": -68,
+  "y": -134,
+  "pages": [
+    {
+      "type": "text",
+      "body": "tc.research_page.MIRRORESSENTIA.1"
+    },
+    {
+      "type": "infusion",
+      "title": "recipe.type.infusion",
+      "output": "thaumic_reborn:essentia_mirror",
+      "central": "thaumic_reborn:mirrored_glass",
+      "components": [
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 1
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 1
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 1
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "count": 1
+        }
+      ],
+      "aspect_costs": [
+        {
+          "id": "iter",
+          "amount": 8
+        },
+        {
+          "id": "aqua",
+          "amount": 8
+        },
+        {
+          "id": "permutatio",
+          "amount": 8
+        }
+      ],
+      "instability": "moderate",
+      "detail": "recipe.type.infusion",
+      "recipe": "thaumic_reborn:essentia_mirror",
+      "catalog_content": "MirrorEssentia"
+    },
+    {
+      "type": "text",
+      "body": "tc.research_page.MIRRORESSENTIA.2"
+    }
+  ],
+  "icon": "thaumic_reborn:essentia_mirror",
+  "reveal_when": {
+    "type": "research_completed",
+    "id": "mirroressentia"
+  }
+}

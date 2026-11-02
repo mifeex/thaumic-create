@@ -1,0 +1,34 @@
+{
+  "research": "create_engine_arbor",
+  "instability": 2,
+  "central": {
+    "item": "thaumic_create:essentia_engine"
+  },
+  "components": [
+    {
+      "item": "thaumic_reborn:greatwood_log"
+    },
+    {
+      "item": "thaumic_reborn:silverwood_log"
+    },
+    {
+      "item": "minecraft:oak_log"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    }
+  ],
+  "result_modifier": {
+    "type": "tag_boolean",
+    "key": "EngineArbor",
+    "value": 1
+  },
+  "essentia": {
+    "permutatio": 4,
+    "arbor": 12,
+    "praecantatio": 4
+  }
+}

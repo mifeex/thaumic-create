@@ -1,0 +1,38 @@
+{
+  "type": "thaumic_reborn:arcane_shaped",
+  "research": "create_essentia_pump",
+  "vis": {
+    "ordo": 10,
+    "aqua": 10,
+    "perditio": 10
+  },
+  "pattern": [
+    "VAT",
+    "BPB",
+    "THV"
+  ],
+  "key": {
+    "V": {
+      "item": "thaumic_reborn:essentia_valve"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "T": {
+      "item": "thaumic_reborn:essentia_tube"
+    },
+    "P": {
+      "item": "create:mechanical_pump"
+    },
+    "B": {
+      "item": "thaumic_reborn:arcane_bellows"
+    },
+    "A": {
+      "item": "thaumic_reborn:essentia_mirror"
+    }
+  },
+  "result": {
+    "id": "thaumic_create:essentia_pump",
+    "count": 1
+  }
+}

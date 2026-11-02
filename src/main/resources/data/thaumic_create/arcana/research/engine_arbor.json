@@ -1,0 +1,91 @@
+{
+  "node_style": {
+    "frame": "secondary",
+    "special": false
+  },
+  "id": "create_engine_arbor",
+  "category": "create",
+  "title": "research.thaumic_create.engine_arbor.title",
+  "subtitle": "research.thaumic_create.engine_arbor.subtitle",
+  "parents": [
+    "create_essentia_engine"
+  ],
+  "auto_unlock": false,
+  "purchase_cost": [
+    {
+      "id": "arbor",
+      "amount": 6
+    },
+    {
+      "id": "potentia",
+      "amount": 2
+    },
+    {
+      "id": "praecantatio",
+      "amount": 2
+    }
+  ],
+  "research_cost": [
+    {
+      "id": "arbor",
+      "amount": 1
+    },
+    {
+      "id": "praecantatio",
+      "amount": 1
+    }
+  ],
+  "details": {
+    "complexity": 1
+  },
+  "x": -31,
+  "y": 9,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.engine_arbor.body"
+    },
+    {
+      "type": "infusion",
+      "recipe": "thaumic_create:engine_arbor",
+      "output": "thaumic_create:essentia_engine",
+      "central": "thaumic_create:essentia_engine",
+      "components": [
+        {
+          "item": "thaumic_reborn:greatwood_log"
+        },
+        {
+          "item": "thaumic_reborn:silverwood_log"
+        },
+        {
+          "item": "minecraft:oak_log"
+        },
+        {
+          "item": "thaumic_reborn:salis_mundus"
+        },
+        {
+          "item": "thaumic_reborn:salis_mundus"
+        }
+      ],
+      "instability": "MINOR",
+      "aspect_costs": [
+        {
+          "id": "permutatio",
+          "amount": 4
+        },
+        {
+          "id": "arbor",
+          "amount": 12
+        },
+        {
+          "id": "praecantatio",
+          "amount": 4
+        }
+      ]
+    }
+  ],
+  "icon": "thaumic_create:engine_arbor_icon",
+  "hidden_parents": [
+    "infusion"
+  ]
+}

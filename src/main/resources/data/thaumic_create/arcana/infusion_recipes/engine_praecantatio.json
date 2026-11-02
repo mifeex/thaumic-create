@@ -1,0 +1,33 @@
+{
+  "research": "create_engine_praecantatio",
+  "instability": 2,
+  "central": {
+    "item": "thaumic_create:essentia_engine"
+  },
+  "components": [
+    {
+      "item": "thaumic_reborn:order_shard"
+    },
+    {
+      "item": "thaumic_reborn:fire_shard"
+    },
+    {
+      "item": "thaumic_reborn:air_shard"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    },
+    {
+      "item": "thaumic_reborn:salis_mundus"
+    }
+  ],
+  "result_modifier": {
+    "type": "tag_boolean",
+    "key": "EngineMagic",
+    "value": 1
+  },
+  "essentia": {
+    "permutatio": 4,
+    "praecantatio": 16
+  }
+}

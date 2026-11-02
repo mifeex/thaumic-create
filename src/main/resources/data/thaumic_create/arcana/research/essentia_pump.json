@@ -1,0 +1,37 @@
+{
+  "id": "create_essentia_pump",
+  "category": "create",
+  "icon": "thaumic_create:essentia_pump",
+  "title": "research.thaumic_create.essentia_pump.title",
+  "subtitle": "research.thaumic_create.essentia_pump.subtitle",
+  "parents": [
+    "create_essentia_mirror"
+  ],
+  "reveal_when": {
+    "type": "research_completed",
+    "id": "create_essentia_mirror"
+  },
+  "concealed": true,
+  "auto_unlock": false,
+  "node_style": {
+    "frame": "primary",
+    "special": false
+  },
+  "purchase_cost": [],
+  "research_cost": [{"id": "aqua", "amount": 1}, {"id": "motus", "amount": 2}, {"id": "permutatio", "amount": 1}, {"id": "vacuos", "amount": 1}, {"id": "aer", "amount": 1}],
+  "details": {
+    "complexity": 2
+  },
+  "x": -79,
+  "y": -194,
+  "pages": [
+    {
+      "type": "text",
+      "body": "research.thaumic_create.essentia_pump.body"
+    },
+    {
+      "type": "recipe",
+      "recipe": "thaumic_create:essentia_pump"
+    }
+  ]
+}

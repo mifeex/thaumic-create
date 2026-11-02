@@ -23,6 +23,18 @@
     {
       "id": "praecantatio",
       "amount": 1
+    },
+    {
+      "id": "potentia",
+      "amount": 1
+    },
+    {
+      "id": "machina",
+      "amount": 1
+    },
+    {
+      "id": "motus",
+      "amount": 1
     }
   ],
   "details": {

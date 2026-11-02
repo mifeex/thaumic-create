@@ -29,6 +29,8 @@ public final class EssentiaTankBlockEntity extends FluidTankBlockEntity {
         tankInventory.setCapacity(Math.max(1, Math.min(40, getTotalTankSize())) * EssentiaFluid.BLOCK_CAPACITY);
         // Super reads Create's configurable capacity; restore the original payload after fixing ours.
         if (isController() && tag.contains("TankContent")) tankInventory.readFromNBT(provider, tag.getCompound("TankContent"));
+        if (isController() && getFluidLevel() != null)
+            getFluidLevel().chase(getFillState(), 0.5, net.createmod.catnip.animation.LerpedFloat.Chaser.EXP);
     }
     @Override public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> lines, boolean sneaking) {
         var controller = getControllerBE();
@@ -41,5 +43,6 @@ public final class EssentiaTankBlockEntity extends FluidTankBlockEntity {
             tank.getFluidAmount() / EssentiaFluid.UNIT, tank.getCapacity() / EssentiaFluid.UNIT));
         return true;
     }
+    public boolean hasWindows() { return window; }
     @Override public void updateBoilerState() { /* Essentia is never boiler water. */ }
 }

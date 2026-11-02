@@ -18,14 +18,18 @@ public final class DeviceClient {
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void renderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(DeviceRegistry.PUMP_ENTITY.get(), EssentiaPumpRenderer::new);
         event.registerBlockEntityRenderer(DeviceRegistry.ENGINE_ENTITY.get(), EssentiaEngineRenderer::new);
-        event.registerBlockEntityRenderer(DeviceRegistry.TANK_ENTITY.get(), com.simibubi.create.content.fluids.tank.FluidTankRenderer::new);
+        event.registerBlockEntityRenderer(DeviceRegistry.ADAPTER_ENTITY.get(), EssentiaAdapterRenderer::new);
+        event.registerBlockEntityRenderer(DeviceRegistry.TANK_ENTITY.get(), EssentiaTankRenderer::new);
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void setup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
         TankConnectedTextures.register();
         EssentiaEngineRenderer.init();
+        EssentiaPumpRenderer.init();
         event.enqueueWork(() -> {
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.PUMP.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ENGINE.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.TANK.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(DeviceRegistry.ADAPTER.get(), net.minecraft.client.renderer.RenderType.cutoutMipped());
@@ -36,12 +40,32 @@ public final class DeviceClient {
         event.enqueueWork(() -> {
             var hud = com.thaumicreborn.api.client.ThaumicRebornClientApi.hud();
             hud.registerAspectContainer(EssentiaEngineBlockEntity.class, (engine, hit) -> {
-                int amount = (int)Math.ceil(engine.storedEssentia());
-                if (amount <= 0) return java.util.Optional.empty();
+                var aspects=engine.storedAspects().entrySet().stream().map(e->new com.thaumicreborn.api.client.HudAspect(e.getKey(),(int)Math.ceil(e.getValue()))).toList();
+                return aspects.isEmpty()?java.util.Optional.empty():java.util.Optional.of(new com.thaumicreborn.api.client.HudReadout(aspects,hud.onHitFace(hit)));
+            });
+            hud.registerAspectContainer(EssentiaAdapterBlockEntity.class, (adapter, hit) -> {
+                var fluid = adapter.buffer.getFluid();
+                String aspect = EssentiaFluid.aspect(fluid);
+                if (aspect == null || fluid.isEmpty()) return java.util.Optional.empty();
                 return java.util.Optional.of(new com.thaumicreborn.api.client.HudReadout(
-                        java.util.List.of(new com.thaumicreborn.api.client.HudAspect("potentia", amount)),
-                        hud.onHitFace(hit)));
+                    java.util.List.of(new com.thaumicreborn.api.client.HudAspect(aspect,
+                        (int)Math.ceil(fluid.getAmount() / (double)EssentiaFluid.UNIT))), hud.onHitFace(hit)));
+            });
+            hud.registerAspectContainer(EssentiaTankBlockEntity.class, (tank, hit) -> {
+                var controller = tank.getControllerBE();
+                if (controller == null) return java.util.Optional.empty();
+                var fluid = controller.getTankInventory().getFluid();
+                String aspect = EssentiaFluid.aspect(fluid);
+                if (aspect == null || fluid.isEmpty()) return java.util.Optional.empty();
+                return java.util.Optional.of(new com.thaumicreborn.api.client.HudReadout(
+                    java.util.List.of(new com.thaumicreborn.api.client.HudAspect(aspect,
+                        (int)Math.ceil(fluid.getAmount() / (double)EssentiaFluid.UNIT))), hud.onHitFace(hit)));
             });
         });
+    }
+    @net.neoforged.bus.api.SubscribeEvent
+    public static void engineAspectColors(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.Item event) {
+        event.register((stack, layer) -> 0xFF876531, DeviceRegistry.ARBOR_ICON.get());
+        event.register((stack, layer) -> 0xFF9700C0, DeviceRegistry.MAGIC_ICON.get());
     }
 }

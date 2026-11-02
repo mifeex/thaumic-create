@@ -4,12 +4,12 @@ plugins {
 }
 def localAddonDependencies = file('.gradle/local-libs/neoforge-1.21.1').exists() ? '.gradle/local-libs/neoforge-1.21.1' : 'libs'
 
-version = '0.4.0'
-group = 'com.thaumiccreate'
-base { archivesName = 'thaumic-create-neoforge-1.21.1' }
+version = mod_version
+group = mod_group
+base { archivesName = mod_archive_name }
 java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
 neoForge {
-    enable { version = '21.1.259'; disableRecompilation = true }
+    enable { version = project.neoforge_version; disableRecompilation = true }
     mods { thaumic_create { sourceSet sourceSets.main } }
 }
 
@@ -43,4 +43,15 @@ neoForge.runs {
         client()
         gameDirectory = file('run-neoforge')
     }
+}
+
+// Native mirror linking/air transfer is supplied by Thaumic Reborn at runtime.
+dependencies { compileOnly fileTree(dir: localAddonRuntime, include: "thaumic-reborn-neoforge-*.jar") }
+
+// Expand mod metadata into the loader descriptor when resources are packaged.
+tasks.named('processResources', ProcessResources).configure {
+    def metadata = [mod_id: project.mod_id, mod_name: project.mod_name, mod_license: project.mod_license,
+                    mod_version: project.mod_version, mod_authors: project.mod_authors, mod_description: project.mod_description]
+    inputs.properties(metadata)
+    filesMatching('META-INF/neoforge.mods.toml') { expand(metadata) }
 }

@@ -16,8 +16,13 @@ public final class DeviceRegistry {
     private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(net.minecraft.core.registries.Registries.FLUID, ThaumicCreate.ID);
     private static final DeferredRegister<FluidType> TYPES = DeferredRegister.create(net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.FLUID_TYPES, ThaumicCreate.ID);
     public static final Supplier<EssentiaEngineBlock> ENGINE = BLOCKS.register("essentia_engine", EssentiaEngineBlock::new);
-    public static final Supplier<Item> ENGINE_ITEM = ITEMS.register("essentia_engine", () -> new BlockItem(ENGINE.get(), new Item.Properties()));
+    public static final Supplier<Item> ENGINE_ITEM = ITEMS.register("essentia_engine", () -> new EssentiaEngineItem(ENGINE.get(), new Item.Properties().stacksTo(1)));
     public static final Supplier<BlockEntityType<EssentiaEngineBlockEntity>> ENGINE_ENTITY = ENTITIES.register("essentia_engine", () -> BlockEntityType.Builder.of(EssentiaEngineBlockEntity::new, ENGINE.get()).build(null));
+    public static final Supplier<Item> ARBOR_ICON = ITEMS.register("engine_arbor_icon", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> MAGIC_ICON = ITEMS.register("engine_magic_icon", () -> new Item(new Item.Properties()));
+    public static final Supplier<EssentiaPumpBlock> PUMP = BLOCKS.register("essentia_pump", EssentiaPumpBlock::new);
+    public static final Supplier<Item> PUMP_ITEM = ITEMS.register("essentia_pump", () -> new BlockItem(PUMP.get(), new Item.Properties()));
+    public static final Supplier<BlockEntityType<EssentiaPumpBlockEntity>> PUMP_ENTITY = ENTITIES.register("essentia_pump", () -> BlockEntityType.Builder.of(EssentiaPumpBlockEntity::new, PUMP.get()).build(null));
     public static final Supplier<EssentiaTankBlock> TANK = BLOCKS.register("essentia_tank", EssentiaTankBlock::new);
     public static final Supplier<EssentiaAdapterBlock> ADAPTER = BLOCKS.register("essentia_adapter", EssentiaAdapterBlock::new);
     public static final Supplier<Item> TANK_ITEM = ITEMS.register("essentia_tank", () -> new BlockItem(TANK.get(), new Item.Properties()));
@@ -40,7 +45,7 @@ public final class DeviceRegistry {
     }
     private static void creative(net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey().equals(net.minecraft.world.item.CreativeModeTabs.FUNCTIONAL_BLOCKS)) {
-            event.accept(ENGINE_ITEM.get()); event.accept(TANK_ITEM.get()); event.accept(ADAPTER_ITEM.get());
+            event.accept(PUMP_ITEM.get()); event.accept(ENGINE_ITEM.get()); event.accept(TANK_ITEM.get()); event.accept(ADAPTER_ITEM.get());
         }
     }
     private static void capabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) {
